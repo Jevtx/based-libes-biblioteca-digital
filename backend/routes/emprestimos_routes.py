@@ -1,5 +1,6 @@
 from datetime import datetime, timezone
 
+from firebase_admin import firestore
 from flask import Blueprint, jsonify, request
 from flask_jwt_extended import get_jwt, get_jwt_identity
 
@@ -99,7 +100,7 @@ def criar_emprestimo():
 
     emprestimo_ref = db.collection("emprestimos").document()
 
-    @db.transactional
+    @firestore.transactional
     def transacao(transaction):
         livro_atual = livro_ref.get(transaction=transaction)
 
@@ -173,7 +174,7 @@ def devolver_emprestimo(emprestimo_id):
         emprestimo["livro_id"]
     )
 
-    @db.transactional
+    @firestore.transactional
     def transacao(transaction):
         atual = emprestimo_ref.get(transaction=transaction)
 

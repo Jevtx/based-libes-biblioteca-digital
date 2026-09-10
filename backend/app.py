@@ -4,6 +4,7 @@ from dotenv import load_dotenv
 from flask import Flask
 from flask_cors import CORS
 from flask_jwt_extended import JWTManager
+from werkzeug.exceptions import HTTPException
 
 # Carrega o arquivo .env (se existir) para variáveis como
 # JWT_SECRET_KEY e as configurações de SMTP da recuperação de senha.
@@ -43,6 +44,23 @@ app.register_blueprint(auth_bp)
 app.register_blueprint(livros_bp)
 app.register_blueprint(usuarios_bp)
 app.register_blueprint(emprestimos_bp)
+
+
+# Garante que qualquer erro inesperado do servidor (uma exceção que
+# ninguém previu) sempre volte como JSON, com o campo "erro" que o
+# frontend já sabe ler — em vez da página HTML padrão do Flask, que
+# fazia o frontend mostrar uma mensagem genérica sem pista nenhuma do
+# que realmente aconteceu.
+@app.errorhandler(Exception)
+def tratar_erro_inesperado(erro):
+    if isinstance(erro, HTTPException):
+        # Erros "normais" do próprio Flask (404 rota inexistente, 405
+        # método errado, etc.) — mantém o status original, só troca o
+        # corpo pra JSON.
+        return {"erro": erro.description}, erro.code
+
+    app.logger.exception("Erro inesperado não tratado")
+    return {"erro": "Erro interno no servidor. Tente novamente em instantes."}, 500
 
 
 @app.get("/")
