@@ -6,8 +6,10 @@
 
 "use strict";
 
-const API_BASE_URL =
-    window.API_BASE_URL || "http://127.0.0.1:5000";
+// API_BASE_URL já é declarada em js/auth.js (carregado antes desta página) —
+// não redeclarar aqui, senão o navegador quebra com
+// "SyntaxError: redeclaration of const API_BASE_URL" e o arquivo inteiro
+// para de funcionar.
 
 const ESTADO_LIVROS = {
     generoAtual: "",
