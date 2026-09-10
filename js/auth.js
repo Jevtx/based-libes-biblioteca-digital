@@ -75,23 +75,67 @@ function exigirAcessoAdmin() {
   if (tipo === "CLIENTE") window.location.href = "livros.html";
 }
 
-// Mostra/esconde links de menu conforme o tipo do usuário logado
-// (usado apenas nas páginas que ainda têm esses ids no menu).
+// Adapta o menu (.nav-links / .nav-login) conforme quem está logado:
+// - visitante: menu padrão (Início/Livros/Meus empréstimos) + "Entrar"
+// - CLIENTE logado: mesmo menu, mas "Entrar" vira "Sair"
+// - ADM/ATENDENTE logado: menu vira Livros/Usuários/Empréstimos
+//   (apontando para os painéis administrativos) + "Sair"
+//
+// Roda sozinho em qualquer página que carregue este arquivo (ver
+// DOMContentLoaded no fim do arquivo) — não precisa ser chamada à mão.
 function configurarNavegacao() {
   const usuario = getUsuario();
+  const token = getToken();
+  const logado = Boolean(token && usuario);
   const tipo = (usuario && usuario.tipo) || "";
-  const ehAdminOuAtendente = tipo === "ATENDENTE" || tipo === "ADM";
+  const ehGestor = tipo === "ATENDENTE" || tipo === "ADM";
 
-  const linkLivros = document.getElementById("link-admin-livros");
-  const linkUsuarios = document.getElementById("link-admin-usuarios");
-  if (linkLivros) linkLivros.style.display = ehAdminOuAtendente ? "" : "none";
-  if (linkUsuarios) linkUsuarios.style.display = ehAdminOuAtendente ? "" : "none";
+  const linksMenu = document.querySelectorAll(".nav-links .nav-link");
 
-  document.getElementById("link-logout")?.addEventListener("click", (e) => {
-    e.preventDefault();
-    logout();
-  });
+  if (linksMenu.length >= 3) {
+    if (logado && ehGestor) {
+      const destinos = [
+        { texto: "Livros", href: "admin-livros.html" },
+        { texto: "Usuários", href: "admin-usuarios.html" },
+        { texto: "Empréstimos", href: "admin-emprestimos.html" },
+      ];
+      linksMenu.forEach((link, indice) => {
+        const destino = destinos[indice];
+        if (!destino) return;
+        link.textContent = destino.texto;
+        link.setAttribute("href", destino.href);
+        link.classList.toggle(
+          "active",
+          window.location.pathname.endsWith(destino.href)
+        );
+      });
+    } else {
+      // Corrige um link antigo que ficou sem o ".html" no final.
+      linksMenu.forEach((link) => {
+        if ((link.getAttribute("href") || "").endsWith("meus-emprestimos")) {
+          link.setAttribute("href", "meus-emprestimos.html");
+        }
+      });
+    }
+  }
+
+  // Páginas simples (index.html, livros.html) usam um único link "Entrar".
+  const linkLogin = document.querySelector(".nav-login");
+  if (linkLogin && logado) {
+    linkLogin.textContent = usuario.nome ? `Sair (${usuario.nome})` : "Sair";
+    linkLogin.setAttribute("href", "#");
+    linkLogin.addEventListener("click", (e) => {
+      e.preventDefault();
+      logout();
+    });
+  }
+
+  // Páginas com área de usuário própria (ex: meus-emprestimos.html, que já
+  // controla #loansUserName/#loansLogout sozinha) não são mexidas aqui —
+  // só a troca de abas acima (Livros/Usuários/Empréstimos) se aplica a elas.
 }
+
+document.addEventListener("DOMContentLoaded", configurarNavegacao);
 
 /* ============================================================
    MENSAGENS DE FORMULÁRIO

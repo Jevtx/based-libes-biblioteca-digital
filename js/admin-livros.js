@@ -1222,7 +1222,11 @@ const AdminLivrosPage = {
     },
 
     abrirModal() {
-        this.elementos.modal?.classList.remove(
+        this.elementos.modal?.classList.add(
+            "open"
+        );
+
+        this.elementos.modal?.removeAttribute(
             "hidden"
         );
 
@@ -1236,8 +1240,13 @@ const AdminLivrosPage = {
     },
 
     fecharModal() {
-        this.elementos.modal?.classList.add(
-            "hidden"
+        this.elementos.modal?.classList.remove(
+            "open"
+        );
+
+        this.elementos.modal?.setAttribute(
+            "hidden",
+            ""
         );
 
         this.elementos.modal?.setAttribute(

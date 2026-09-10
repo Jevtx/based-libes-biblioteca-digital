@@ -408,7 +408,18 @@ async function solicitarEmprestimo(botao) {
     const livroId = botao?.dataset.livroId;
 
     if (!livroId) {
-        window.location.href = "login.html";
+        window.alert(
+            "Este livro ainda não está cadastrado no sistema (nenhum " +
+            "registro correspondente foi encontrado na base de dados). " +
+            "Peça para um ATENDENTE ou ADM cadastrá-lo em \"Gerenciar livros\" " +
+            "antes de tentar o empréstimo."
+        );
+        console.warn(
+            "Empréstimo cancelado: o card não tem data-livro-id. Isso " +
+            "acontece quando o título do card não bate com nenhum livro " +
+            "retornado por GET /livros — normalmente porque o livro ainda " +
+            "não foi cadastrado no Firestore."
+        );
         return;
     }
 

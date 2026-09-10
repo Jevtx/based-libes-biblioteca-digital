@@ -1006,7 +1006,12 @@ function abrirModalUsuario() {
 
 
     usuariosElementos.modal
-        ?.classList.remove(
+        ?.classList.add(
+            "open"
+        );
+
+    usuariosElementos.modal
+        ?.removeAttribute(
             "hidden"
         );
 
@@ -1030,8 +1035,14 @@ function abrirModalUsuario() {
 function fecharModalUsuario() {
 
     usuariosElementos.modal
-        ?.classList.add(
-            "hidden"
+        ?.classList.remove(
+            "open"
+        );
+
+    usuariosElementos.modal
+        ?.setAttribute(
+            "hidden",
+            ""
         );
 
 
