@@ -17,5 +17,5 @@
 
   window.API_BASE_URL = ehAmbienteLocal
     ? "http://127.0.0.1:5000"
-    : "https://SUBSTITUA-PELA-URL-DO-SEU-BACKEND.onrender.com"; // <-- troque aqui após publicar o backend
+    : "https://biblioteca-digital-z1bt.onrender.com"; // <-- troque aqui após publicar o backend
 })();
