@@ -101,6 +101,69 @@ const elementosEmprestimosAdmin = {
 
 
 /* ============================================================
+   CHAMADAS AUTENTICADAS À API
+
+   Essa função é usada por toda a página (listar empréstimos, devolver
+   um empréstimo), mas nunca tinha sido escrita — o arquivo já contava
+   com ela, chamando `apiAuthenticatedRequest(...)`, só faltava esta
+   definição. Sem ela, todo carregamento de empréstimos falhava
+   silenciosamente com "apiAuthenticatedRequest is not defined".
+   ============================================================ */
+
+async function apiAuthenticatedRequest(endpoint, opcoes = {}) {
+    const base = window.API_BASE_URL || "http://127.0.0.1:5000";
+    const url =
+        base.replace(/\/+$/, "") +
+        "/" +
+        String(endpoint).replace(/^\/+/, "");
+
+    const token =
+        typeof getToken === "function"
+            ? getToken()
+            : localStorage.getItem("biblioteca_token");
+
+    const headers = {
+        Accept: "application/json",
+        ...(opcoes.headers || {}),
+    };
+
+    if (opcoes.body && !headers["Content-Type"]) {
+        headers["Content-Type"] = "application/json";
+    }
+
+    if (token) {
+        headers.Authorization = `Bearer ${token}`;
+    }
+
+    const resposta = await fetch(url, { ...opcoes, headers });
+
+    const texto = await resposta.text();
+    let dados = null;
+
+    if (texto) {
+        try {
+            dados = JSON.parse(texto);
+        } catch (erroParse) {
+            dados = texto;
+        }
+    }
+
+    if (!resposta.ok) {
+        const mensagem =
+            (dados && typeof dados === "object" && dados.erro) ||
+            `Erro ${resposta.status}.`;
+
+        const erro = new Error(mensagem);
+        erro.status = resposta.status;
+        erro.dados = dados;
+        throw erro;
+    }
+
+    return dados;
+}
+
+
+/* ============================================================
    INICIALIZAÇÃO
    ============================================================ */
 
