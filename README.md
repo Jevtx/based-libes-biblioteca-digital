@@ -15,7 +15,7 @@ CRUD de livros/usuários e empréstimos foram testados localmente com sucesso.
   da lista de segurança).
 - Confirmado que `firebase-config.js` está com valores reais (`apiKey`, `messagingSenderId`,
   `appId`) do projeto `biblioteca-14ecc`.
-- **Adicionado `frontend/js/config.js`**: define automaticamente a URL da API certa
+- **Adicionado `js/config.js`**: define automaticamente a URL da API certa
   (desenvolvimento local vs. produção), incluído como o primeiro `<script>` em todas as
   páginas. Veja `Publicar_no_Netlify.md` para o que precisa ser editado nele.
 - **Adicionado suporte a `FIREBASE_CREDENTIALS_JSON`** em `firebase_config.py`: em produção, em
@@ -23,7 +23,7 @@ CRUD de livros/usuários e empréstimos foram testados localmente com sucesso.
   Testado e funcionando.
 - **Adicionado `gunicorn`** ao `requirements.txt` (servidor de produção; o `python app.py` local
   continua funcionando igual, sem mudança no seu fluxo do dia a dia).
-- **Adicionado `netlify.toml`** na raiz, configurando a pasta `frontend/` como a publicada.
+- **Adicionado `netlify.toml`** na raiz — o projeto foi reorganizado com `index.html` e tudo do frontend direto na raiz (sem a subpasta `frontend/`), o que simplifica a configuração no Netlify. A pasta `backend/` continua separada, e o `netlify.toml` já bloqueia o acesso público a ela.
 - `CORS_ORIGINS` no `app.py` agora também lê uma variável de ambiente (além dos endereços locais
   fixos), para você liberar a URL do Netlify sem precisar editar código.
 
@@ -49,8 +49,7 @@ python seed_admin.py   # só na primeira vez
 python app.py           # sobe a API em http://localhost:5000
 ```
 
-Sirva `frontend/` com o Live Server do VS Code (porta 5500) ou `python -m http.server 5500`
-dentro da pasta.
+Sirva a pasta raiz do projeto com o Live Server do VS Code (porta 5500) ou `python -m http.server 5500` a partir dela — o `index.html` já está na raiz.
 
 ## Atenção: `serviceAccountKey.json` e `.env`
 

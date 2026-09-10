@@ -1,15 +1,23 @@
 # Configuração de publicação do Netlify.
 #
-# O Netlify só serve arquivos estáticos (HTML/CSS/JS) — ele NÃO roda o
-# backend em Python. Por isso, este arquivo só configura a pasta
-# "frontend". O backend (pasta "backend") precisa ser publicado
-# separadamente em um serviço que rode Python, como Render, Railway
-# ou PythonAnywhere. Veja o guia "Publicar_no_Netlify.md" para o
-# passo a passo completo.
+# Agora que o frontend está na raiz do projeto, não é preciso configurar
+# "Base directory" nem "Publish directory" na interface do Netlify — o
+# valor abaixo (".") já resolve isso sozinho.
+#
+# O Netlify só serve arquivos estáticos — ele NÃO roda o backend em
+# Python. A pasta "backend/" continua no mesmo repositório (para o
+# Render usar), mas o bloco [[redirects]] abaixo impede que ela seja
+# acessada publicamente pelo site do Netlify.
 
 [build]
-  base = "frontend"
   publish = "."
+
+# Bloqueia qualquer tentativa de acessar a pasta backend/ pelo site do Netlify.
+[[redirects]]
+  from = "/backend/*"
+  to = "/404.html"
+  status = 404
+  force = true
 
 # Página inicial do site.
 [[redirects]]
