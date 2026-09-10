@@ -349,27 +349,80 @@ function atualizarCardComLivro(card, livro) {
     }
 }
 
-async function sincronizarCatalogo() {
-    try {
-        const token = localStorage.getItem("biblioteca_token");
-        const headers = {
-            Accept: "application/json"
-        };
+function mostrarAvisoCatalogo(texto, comBotaoTentarNovamente) {
+    let aviso = document.getElementById("avisoSincronizacao");
 
-        if (token) {
-            headers.Authorization = `Bearer ${token}`;
-        }
+    if (!aviso) {
+        aviso = document.createElement("div");
+        aviso.id = "avisoSincronizacao";
+        aviso.style.cssText =
+            "max-width:1200px;margin:0 auto 20px;padding:14px 18px;" +
+            "border-radius:12px;border:1px solid rgba(255,255,255,0.22);" +
+            "background:rgba(255,255,255,0.06);color:#fff;font-family:var(--sans);" +
+            "font-size:13px;display:flex;align-items:center;justify-content:space-between;" +
+            "gap:12px;flex-wrap:wrap;";
 
-        const resposta = await fetch(
-            `${API_BASE_URL}/livros`,
-            { headers }
+        const alvo =
+            document.getElementById("catalogo") ||
+            document.querySelector(".page-content") ||
+            document.body;
+        alvo.insertBefore(aviso, alvo.firstChild);
+    }
+
+    aviso.innerHTML = "";
+
+    const span = document.createElement("span");
+    span.textContent = texto;
+    aviso.appendChild(span);
+
+    if (comBotaoTentarNovamente) {
+        const botao = document.createElement("button");
+        botao.type = "button";
+        botao.textContent = "Tentar novamente";
+        botao.style.cssText =
+            "border:1px solid rgba(255,255,255,0.35);background:transparent;" +
+            "color:#fff;border-radius:20px;padding:8px 16px;cursor:pointer;" +
+            "font-size:12px;font-weight:600;";
+        botao.addEventListener("click", () => sincronizarCatalogo());
+        aviso.appendChild(botao);
+    }
+}
+
+function removerAvisoCatalogo() {
+    document.getElementById("avisoSincronizacao")?.remove();
+}
+
+async function tentarBuscarLivros() {
+    const token = localStorage.getItem("biblioteca_token");
+    const headers = { Accept: "application/json" };
+    if (token) headers.Authorization = `Bearer ${token}`;
+
+    const resposta = await fetch(`${API_BASE_URL}/livros`, { headers });
+    if (!resposta.ok) {
+        throw new Error(`API respondeu ${resposta.status}`);
+    }
+    return resposta.json();
+}
+
+// O plano gratuito do Render "dorme" o backend depois de um tempo sem uso —
+// a primeira chamada depois disso pode demorar 30-50s pra responder (ou até
+// falhar de primeira). Por isso tentamos algumas vezes, com espera crescente,
+// em vez de desistir na primeira falha.
+async function sincronizarCatalogo(tentativa = 1) {
+    const MAX_TENTATIVAS = 4;
+    const ESPERAS_MS = [0, 4000, 8000, 15000];
+
+    if (tentativa === 1) {
+        mostrarAvisoCatalogo("Carregando disponibilidade dos livros...", false);
+    } else {
+        mostrarAvisoCatalogo(
+            `O servidor está iniciando, ainda tentando conectar... (tentativa ${tentativa} de ${MAX_TENTATIVAS})`,
+            false
         );
+    }
 
-        if (!resposta.ok) {
-            return;
-        }
-
-        const dados = await resposta.json();
+    try {
+        const dados = await tentarBuscarLivros();
         const livros = Array.isArray(dados)
             ? dados
             : Array.isArray(dados?.livros)
@@ -383,20 +436,46 @@ async function sincronizarCatalogo() {
             ])
         );
 
+        let algumEncontrado = false;
+
         document.querySelectorAll(".book-card").forEach((card) => {
             const livro = porTitulo.get(
                 normalizarTexto(card.dataset.title)
             );
 
             if (livro) {
+                algumEncontrado = true;
                 atualizarCardComLivro(card, livro);
             }
         });
+
+        removerAvisoCatalogo();
+
+        if (!algumEncontrado && livros.length === 0) {
+            mostrarAvisoCatalogo(
+                "Nenhum livro cadastrado no sistema ainda — peça a um " +
+                "ATENDENTE ou ADM para cadastrar em \"Gerenciar livros\".",
+                false
+            );
+        }
     } catch (erro) {
         console.warn(
-            "Não foi possível sincronizar o catálogo com a API.",
+            `Tentativa ${tentativa} de sincronizar o catálogo falhou.`,
             erro
         );
+
+        if (tentativa < MAX_TENTATIVAS) {
+            setTimeout(
+                () => sincronizarCatalogo(tentativa + 1),
+                ESPERAS_MS[tentativa]
+            );
+        } else {
+            mostrarAvisoCatalogo(
+                "Não foi possível conectar ao servidor. Confira sua internet " +
+                "e tente de novo.",
+                true
+            );
+        }
     }
 }
 
