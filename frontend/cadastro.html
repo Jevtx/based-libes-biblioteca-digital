@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Criar conta | Biblioteca Digital</title>
+<meta content="Crie sua conta de cliente na Biblioteca Digital." name="description"/>
+<link href="css/style.css" rel="stylesheet"/>
+<!-- Estilos específicos da página de cadastro -->
+
+</head>
+<body class="auth-page auth-register-page">
+<!-- =========================================================
+         NAVBAR
+         ========================================================= -->
+<header class="navbar-wrapper">
+<nav class="navbar">
+<a class="brand" href="index.html">
+<span class="brand-icon">✦</span>
+<span>Biblioteca</span>
+</a>
+<div class="nav-links">
+<a class="nav-link" href="index.html">
+                    Início
+                </a>
+<a class="nav-link" href="livros.html">
+                    Livros
+                </a>
+<a class="nav-link" href="meus-emprestimos.html">
+                    Meus empréstimos
+                </a>
+</div>
+<a class="nav-login" href="login.html">
+                Entrar
+            </a>
+</nav>
+</header>
+<!-- =========================================================
+         CONTEÚDO PRINCIPAL
+         ========================================================= -->
+<main class="auth-main">
+<section aria-labelledby="cadastroTitulo" class="auth-card">
+<!-- =====================================================
+                 FORMULÁRIO
+                 ===================================================== -->
+<div id="cadastroContainer">
+<div class="auth-header">
+<span class="auth-label">
+                        BIBLIOTECA DIGITAL
+                    </span>
+<h1 class="auth-title" id="cadastroTitulo">
+                        Crie sua conta.
+                    </h1>
+<p class="auth-subtitle">
+                        Sua próxima história começa aqui.
+                        Cadastre-se para explorar a biblioteca.
+                    </p>
+</div>
+<form class="auth-form" id="cadastroForm" novalidate="">
+<!-- NOME -->
+<div class="form-group">
+<label for="nome">
+                            Nome completo
+                        </label>
+<input autocomplete="name" id="nome" maxlength="100" name="nome" placeholder="Digite seu nome completo" required="" type="text"/>
+</div>
+<!-- E-MAIL -->
+<div class="form-group">
+<label for="email">
+                            E-mail
+                        </label>
+<input autocomplete="email" id="email" maxlength="120" name="email" placeholder="Digite seu e-mail" required="" type="email"/>
+</div>
+<!-- SENHA -->
+<div class="form-group">
+<label for="senha">
+                            Senha
+                        </label>
+<div class="password-wrapper">
+<input autocomplete="new-password" id="senha" minlength="6" name="senha" placeholder="Crie uma senha" required="" type="password"/>
+<button aria-label="Mostrar senha" class="password-toggle" data-target="senha" title="Mostrar senha" type="button">
+                                ◉
+                            </button>
+</div>
+</div>
+<!-- CONFIRMAR SENHA -->
+<div class="form-group">
+<label for="confirmarSenha">
+                            Confirmar senha
+                        </label>
+<div class="password-wrapper">
+<input autocomplete="new-password" id="confirmarSenha" minlength="6" name="confirmarSenha" placeholder="Digite a senha novamente" required="" type="password"/>
+<button aria-label="Mostrar senha" class="password-toggle" data-target="confirmarSenha" title="Mostrar senha" type="button">
+                                ◉
+                            </button>
+</div>
+</div>
+<!-- TERMOS -->
+<label class="terms">
+<input id="aceiteTermos" name="aceiteTermos" required="" type="checkbox"/>
+<span>
+                            Li e concordo com os
+                            <a href="#" onclick="return false;">
+                                termos de uso
+                            </a>
+                            e a política de privacidade.
+                        </span>
+</label>
+<!-- MENSAGEM -->
+<div aria-live="polite" class="form-message" id="cadastroMessage" role="alert"></div>
+<!-- BOTÃO -->
+<button class="auth-submit" id="cadastroSubmit" type="submit">
+                        Criar minha conta
+                    </button>
+</form>
+<!-- RODAPÉ DO FORMULÁRIO -->
+<div class="auth-footer">
+
+                    Já possui uma conta?
+
+                    <a href="login.html">
+                        Entrar
+                    </a>
+</div>
+</div>
+<!-- =====================================================
+                 SUCESSO
+                 ===================================================== -->
+<div aria-live="polite" class="auth-success" id="cadastroSuccess">
+<div class="auth-success-icon">
+                    ✓
+                </div>
+<h2>
+                    Conta criada!
+                </h2>
+<p>
+                    Seu cadastro foi realizado com sucesso.
+                    Agora você já pode entrar na Biblioteca Digital
+                    e começar sua jornada pelos livros.
+                </p>
+<a class="auth-submit" href="login.html">
+                    Entrar na minha conta
+                </a>
+</div>
+</section>
+</main>
+<!-- =========================================================
+         JAVASCRIPT DE AUTENTICAÇÃO
+         ========================================================= -->
+<script src="js/config.js"></script>
+<script src="js/auth.js"></script>
+</body>
+</html>

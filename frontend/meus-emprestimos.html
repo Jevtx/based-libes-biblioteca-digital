@@ -1,0 +1,324 @@
+<!DOCTYPE html>
+
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>
+   Meus empréstimos | Biblioteca Digital
+  </title>
+<meta content="Consulte seus livros emprestados e acompanhe suas devoluções na Biblioteca Digital." name="description"/>
+<link href="css/style.css" rel="stylesheet"/>
+
+</head>
+<body class="loans-page">
+<header class="navbar-wrapper">
+<nav aria-label="Navegação principal" class="navbar">
+<a aria-label="Biblioteca Digital - Início" class="brand" href="index.html">
+<span aria-hidden="true" class="brand-icon">
+      ✦
+     </span>
+<span>
+      Biblioteca
+     </span>
+</a>
+<div class="nav-links">
+<a class="nav-link" href="index.html">
+      Início
+     </a>
+<a class="nav-link" href="livros.html">
+      Livros
+     </a>
+<a aria-current="page" class="nav-link active" href="meus-emprestimos.html">
+      Meus empréstimos
+     </a>
+</div>
+<div class="nav-user-area">
+<span class="nav-user" id="loansUserName">
+      Minha conta
+     </span>
+<button class="nav-logout" id="loansLogout" type="button">
+      Sair
+     </button>
+</div>
+</nav>
+</header>
+<main class="loans-main">
+<section class="loans-section">
+<div class="loans-container">
+<div class="loans-header">
+<div class="loans-intro">
+<span class="loans-label">
+        BIBLIOTECA DIGITAL
+       </span>
+<h1>
+        Meus
+        <br/>
+<em>
+         empréstimos.
+        </em>
+</h1>
+<p>
+        Acompanhe os livros que estão com você e consulte seu histórico de empréstimos.
+       </p>
+</div>
+<a class="loans-back-books" href="livros.html">
+<span aria-hidden="true">
+        ←
+       </span>
+       Explorar livros
+      </a>
+</div>
+<div aria-label="Resumo dos empréstimos" class="loans-summary">
+<div class="loan-summary-card">
+<span class="loan-summary-label">
+        TOTAL
+       </span>
+<strong class="loan-summary-value" id="loansTotal">
+        0
+       </strong>
+<span class="loan-summary-description">
+        empréstimos
+       </span>
+</div>
+<div class="loan-summary-card">
+<span class="loan-summary-label">
+        ATIVOS
+       </span>
+<strong class="loan-summary-value" id="loansActive">
+        0
+       </strong>
+<span class="loan-summary-description">
+        em andamento
+       </span>
+</div>
+<div class="loan-summary-card">
+<span class="loan-summary-label">
+        DEVOLVIDOS
+       </span>
+<strong class="loan-summary-value" id="loansReturned">
+        0
+       </strong>
+<span class="loan-summary-description">
+        finalizados
+       </span>
+</div>
+</div>
+<div aria-live="polite" class="loans-status" id="loansStatus">
+      SEU HISTÓRICO DE LEITURA
+     </div>
+<section aria-label="Lista de empréstimos" class="loans-list" id="loansList">
+</section>
+<div aria-live="polite" class="loans-loading" id="loansLoading">
+      Carregando seus empréstimos...
+     </div>
+<div class="loans-empty" hidden="" id="loansEmpty">
+      Você ainda não possui empréstimos.
+     </div>
+<div class="loans-error" hidden="" id="loansError" role="alert">
+</div>
+</div>
+</section>
+</main>
+<footer class="site-footer">
+<div class="site-footer-inner">
+<div class="site-footer-brand">
+<a class="brand" href="index.html">
+<span class="brand-icon">
+       ✦
+      </span>
+<span>
+       Biblioteca
+      </span>
+</a>
+<p>
+      Entre em novos mundos.
+     </p>
+</div>
+<div class="site-footer-links">
+<a href="index.html">
+      Início
+     </a>
+<a href="livros.html">
+      Livros
+     </a>
+<a href="meus-emprestimos.html">
+      Meus empréstimos
+     </a>
+</div>
+<div class="site-footer-copy">
+     Biblioteca Digital
+    </div>
+</div>
+</footer>
+<script src="js/config.js"></script>
+<script defer="" src="js/auth.js">
+</script>
+<script>
+   "use strict";
+
+document.addEventListener("DOMContentLoaded", async () => {
+    const API_BASE_URL = window.API_BASE_URL || "http://127.0.0.1:5000";
+    const token = localStorage.getItem("biblioteca_token") || localStorage.getItem("token");
+
+    if (!token) {
+        window.location.href = "login.html";
+        return;
+    }
+
+    let usuario = {};
+    try {
+        usuario = JSON.parse(
+            localStorage.getItem("biblioteca_usuario") ||
+            localStorage.getItem("usuario") ||
+            "{}"
+        );
+    } catch (_) {}
+
+    const userName = document.getElementById("loansUserName");
+    const logout = document.getElementById("loansLogout");
+    const list = document.getElementById("loansList");
+    const loading = document.getElementById("loansLoading");
+    const empty = document.getElementById("loansEmpty");
+    const error = document.getElementById("loansError");
+    const total = document.getElementById("loansTotal");
+    const active = document.getElementById("loansActive");
+    const returned = document.getElementById("loansReturned");
+
+    if (usuario.nome && userName) userName.textContent = usuario.nome;
+
+    logout?.addEventListener("click", () => {
+        if (typeof logout === "function") {
+            window.logout();
+            return;
+        }
+        localStorage.removeItem("biblioteca_token");
+        localStorage.removeItem("biblioteca_usuario");
+        localStorage.removeItem("token");
+        localStorage.removeItem("tipo");
+        localStorage.removeItem("usuarioId");
+        localStorage.removeItem("nome");
+        window.location.href = "login.html";
+    });
+
+    const escapar = (valor) => String(valor ?? "")
+        .replace(/&/g, "&amp;").replace(/</g, "&lt;")
+        .replace(/>/g, "&gt;").replace(/"/g, "&quot;")
+        .replace(/'/g, "&#039;");
+
+    const formatarData = (valor) => {
+        if (!valor) return "-";
+        const data = new Date(valor);
+        return Number.isNaN(data.getTime()) ? String(valor) : data.toLocaleDateString("pt-BR");
+    };
+
+    const renderizar = (emprestimos) => {
+        const lista = Array.isArray(emprestimos) ? emprestimos : [];
+        const ativos = lista.filter((item) => String(item.situacao || "").toUpperCase() === "ATIVO").length;
+        const devolvidos = lista.filter((item) => String(item.situacao || "").toUpperCase() === "DEVOLVIDO").length;
+
+        total.textContent = lista.length;
+        active.textContent = ativos;
+        returned.textContent = devolvidos;
+        list.innerHTML = "";
+
+        if (!lista.length) {
+            empty.hidden = false;
+            return;
+        }
+
+        empty.hidden = true;
+
+        lista.forEach((emp, index) => {
+            const livro = emp.livro || {};
+            const ativo = String(emp.situacao || "").toUpperCase() === "ATIVO";
+            const article = document.createElement("article");
+            article.className = "loan-card";
+            article.innerHTML = `
+                <div class="loan-cover">
+                    <span class="loan-cover-number">${String(index + 1).padStart(2, "0")}</span>
+                    <span class="loan-cover-icon">✦</span>
+                    <span class="loan-cover-title">${escapar(livro.titulo || "Livro")}</span>
+                    <span class="loan-cover-category">${escapar(livro.categoria || "")}</span>
+                </div>
+                <div class="loan-content">
+                    <div class="loan-content-top">
+                        <span class="loan-status ${ativo ? "active" : "returned"}">${ativo ? "Em andamento" : "Devolvido"}</span>
+                        <span class="loan-date">${formatarData(emp.data_emprestimo)}</span>
+                    </div>
+                    <h2>${escapar(livro.titulo || "Livro")}</h2>
+                    <p class="loan-author">${escapar(livro.autor || "Autor não informado")}</p>
+                    <div class="loan-meta">
+                        <span>${escapar(livro.categoria || "Categoria não informada")}</span>
+                        <span>${ativo ? "Empréstimo ativo" : "Finalizado"}</span>
+                    </div>
+                    <div class="loan-footer">
+                        <div class="loan-return-info">
+                            ${ativo ? "Empréstimo realizado" : "Devolvido em"}
+                            <strong>${formatarData(emp.data_devolucao || emp.data_emprestimo)}</strong>
+                        </div>
+                        ${ativo
+                            ? `<button class="loan-button" type="button" data-devolver="${escapar(emp.id)}">Devolver</button>`
+                            : `<button class="loan-button disabled" type="button" disabled>Devolvido</button>`}
+                    </div>
+                </div>`;
+            list.appendChild(article);
+        });
+    };
+
+    async function carregar() {
+        try {
+            const resposta = await fetch(`${API_BASE_URL}/emprestimos`, {
+                headers: { Authorization: `Bearer ${token}` }
+            });
+
+            if (resposta.status === 401) {
+                window.location.href = "login.html";
+                return;
+            }
+
+            const dados = await resposta.json();
+            if (!resposta.ok) throw new Error(dados.erro || "Não foi possível carregar seus empréstimos.");
+            renderizar(dados);
+        } catch (erro) {
+            error.textContent = erro.message || "Não foi possível carregar seus empréstimos.";
+            error.hidden = false;
+        } finally {
+            loading.hidden = true;
+        }
+    }
+
+    document.addEventListener("click", async (event) => {
+        const button = event.target.closest("[data-devolver]");
+        if (!button) return;
+
+        const id = button.dataset.devolver;
+        button.disabled = true;
+        button.textContent = "Processando...";
+
+        try {
+            const resposta = await fetch(
+                `${API_BASE_URL}/emprestimos/${encodeURIComponent(id)}/devolver`,
+                { method: "PUT", headers: { Authorization: `Bearer ${token}` } }
+            );
+            const dados = await resposta.json().catch(() => ({}));
+
+            if (resposta.status === 401) {
+                window.location.href = "login.html";
+                return;
+            }
+            if (!resposta.ok) throw new Error(dados.erro || "Não foi possível registrar a devolução.");
+
+            await carregar();
+        } catch (erro) {
+            alert(erro.message);
+            button.disabled = false;
+            button.textContent = "Devolver";
+        }
+    });
+
+    await carregar();
+});
+  </script>
+</body>
+</html>

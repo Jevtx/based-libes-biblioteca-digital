@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width,initial-scale=1.0" name="viewport"/>
+<title>
+   Empréstimos | Biblioteca Digital
+  </title>
+<link href="css/style.css" rel="stylesheet"/>
+
+</head>
+<body class="admin-page">
+<header class="admin-navbar">
+<nav aria-label="Navegação administrativa" class="admin-navbar-inner">
+<a aria-label="Biblioteca Digital - Início" class="brand" href="index.html">
+<span aria-hidden="true" class="brand-icon">
+      ✦
+     </span>
+<span>
+      Biblioteca
+     </span>
+</a>
+<div class="admin-nav-links">
+<a class="admin-nav-link" href="admin-livros.html">
+      Livros
+     </a>
+<a class="admin-nav-link" href="admin-usuarios.html">
+      Usuários
+     </a>
+<a class="admin-nav-link active" href="admin-emprestimos.html">
+      Empréstimos
+     </a>
+</div>
+<div class="admin-profile">
+<div>
+<div class="admin-user" id="adminLoansUserName">
+       Administrador
+      </div>
+<div class="admin-role" id="adminLoansUserRole">
+       Painel administrativo
+      </div>
+</div>
+<span aria-live="polite" class="admin-profile-badge" id="adminLoansProfileBadge">
+</span>
+<button class="logout" id="adminLoansLogout" type="button">
+      Sair
+     </button>
+</div>
+</nav>
+</header>
+<main class="admin-main">
+<section class="admin-heading">
+<div>
+<span class="eyebrow">
+      PAINEL ADMINISTRATIVO
+     </span>
+<h1>
+      Controle de
+      <br/>
+<em>
+       empréstimos.
+      </em>
+</h1>
+<p>
+      Acompanhe os livros em circulação, devoluções e o histórico de movimentações.
+     </p>
+</div>
+</section>
+<section aria-label="Resumo dos empréstimos" class="stats">
+<div class="stat">
+<span class="stat-label">
+      TOTAL
+     </span>
+<strong class="stat-value" id="loansAdminTotal">
+      0
+     </strong>
+<span class="stat-desc">
+      registros
+     </span>
+</div>
+<div class="stat">
+<span class="stat-label">
+      ATIVOS
+     </span>
+<strong class="stat-value" id="loansAdminActive">
+      0
+     </strong>
+<span class="stat-desc">
+      em andamento
+     </span>
+</div>
+<div class="stat">
+<span class="stat-label">
+      DEVOLVIDOS
+     </span>
+<strong class="stat-value" id="loansAdminReturned">
+      0
+     </strong>
+<span class="stat-desc">
+      finalizados
+     </span>
+</div>
+<div class="stat">
+<span class="stat-label">
+      ATRASADOS
+     </span>
+<strong class="stat-value" id="loansAdminOverdue">
+      0
+     </strong>
+<span class="stat-desc">
+      neste momento
+     </span>
+</div>
+</section>
+<section aria-label="Lista de empréstimos" class="panel">
+<div class="toolbar">
+<input aria-label="Pesquisar empréstimos" autocomplete="off" class="search" id="adminLoansSearch" placeholder="Pesquisar livro ou leitor..." type="search"/>
+<select aria-label="Filtrar por situação" class="select" id="adminLoansStatusFilter">
+<option value="">
+       Todos os status
+      </option>
+<option value="ATIVO">
+       ATIVO
+      </option>
+<option value="DEVOLVIDO">
+       DEVOLVIDO
+      </option>
+</select>
+<span aria-live="polite" class="toolbar-note" id="adminLoansStatus">
+      Carregando empréstimos...
+     </span>
+</div>
+<div class="table-wrap" id="adminLoansTableWrapper">
+<table class="table">
+<thead>
+<tr>
+<th>
+         Livro
+        </th>
+<th>
+         Leitor
+        </th>
+<th>
+         Empréstimo
+        </th>
+<th>
+         Situação
+        </th>
+<th>
+         Ações
+        </th>
+</tr>
+</thead>
+<tbody id="adminLoansTableBody">
+</tbody>
+</table>
+</div>
+<div aria-live="polite" class="admin-loading" id="adminLoansLoading">
+     Carregando empréstimos...
+    </div>
+<div class="admin-empty" hidden="" id="adminLoansEmpty">
+     Nenhum empréstimo encontrado.
+    </div>
+<div class="admin-error" hidden="" id="adminLoansError" role="alert">
+</div>
+</section>
+</main>
+<footer class="footer">
+<div class="footer-inner">
+<span>
+     Biblioteca Digital
+    </span>
+<span>
+     Gestão · Controle · Acervo
+    </span>
+</div>
+</footer>
+<script src="js/config.js"></script>
+<script defer="" src="js/auth.js">
+</script>
+<script defer="" src="js/admin-emprestimos.js">
+</script>
+</body>
+</html>

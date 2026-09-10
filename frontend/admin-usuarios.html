@@ -1,0 +1,245 @@
+<!DOCTYPE html>
+
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width,initial-scale=1.0" name="viewport"/>
+<title>
+   Usuários | Biblioteca Digital
+  </title>
+<link href="css/style.css" rel="stylesheet"/>
+
+</head>
+<body class="admin-page">
+<header class="admin-navbar">
+<nav aria-label="Navegação administrativa" class="admin-navbar-inner">
+<a aria-label="Biblioteca Digital - Início" class="brand" href="index.html">
+<span aria-hidden="true" class="brand-icon">
+      ✦
+     </span>
+<span>
+      Biblioteca
+     </span>
+</a>
+<div class="admin-nav-links">
+<a class="admin-nav-link" href="admin-livros.html">
+      Livros
+     </a>
+<a class="admin-nav-link active" href="admin-usuarios.html">
+      Usuários
+     </a>
+<a class="admin-nav-link" href="admin-emprestimos.html">
+      Empréstimos
+     </a>
+</div>
+<div class="admin-profile">
+<div>
+<div class="admin-user" id="usersUserName">
+       Administrador
+      </div>
+<div class="admin-role" id="usersUserRole">
+       Painel administrativo
+      </div>
+</div>
+<span aria-live="polite" class="admin-profile-badge" id="usersProfileBadge">
+</span>
+<button class="logout" id="usersLogout" type="button">
+      Sair
+     </button>
+</div>
+</nav>
+</header>
+<main class="admin-main">
+<section class="admin-heading">
+<div>
+<span class="eyebrow">
+      PAINEL ADMINISTRATIVO
+     </span>
+<h1>
+      Gestão de
+      <br/>
+<em>
+       usuários.
+      </em>
+</h1>
+<p>
+      Controle os acessos da biblioteca e visualize os perfis cadastrados.
+     </p>
+</div>
+<button class="primary" id="newUserButton" type="button">
+     + Novo cadastro
+    </button>
+</section>
+<section aria-label="Resumo de usuários" class="stats">
+<div class="stat">
+<span class="stat-label">
+      TOTAL
+     </span>
+<strong class="stat-value" id="statUsersTotal">
+      0
+     </strong>
+<span class="stat-desc">
+      usuários
+     </span>
+</div>
+<div class="stat">
+<span class="stat-label">
+      CLIENTES
+     </span>
+<strong class="stat-value" id="statClients">
+      0
+     </strong>
+<span class="stat-desc">
+      leitores
+     </span>
+</div>
+<div class="stat">
+<span class="stat-label">
+      ATENDENTES
+     </span>
+<strong class="stat-value" id="statAttendants">
+      0
+     </strong>
+<span class="stat-desc">
+      equipe interna
+     </span>
+</div>
+<div class="stat">
+<span class="stat-label">
+      ADM
+     </span>
+<strong class="stat-value" id="statAdmins">
+      0
+     </strong>
+<span class="stat-desc">
+      administradores
+     </span>
+</div>
+</section>
+<section aria-label="Lista de usuários" class="panel">
+<div class="toolbar">
+<input aria-label="Pesquisar usuários" autocomplete="off" class="search" id="userSearch" placeholder="Pesquisar por nome ou e-mail..." type="search"/>
+<select aria-label="Filtrar por perfil" class="select" id="userTypeFilter">
+<option value="">
+       Todos os perfis
+      </option>
+<option value="CLIENTE">
+       CLIENTE
+      </option>
+<option value="ATENDENTE">
+       ATENDENTE
+      </option>
+<option value="ADM">
+       ADM
+      </option>
+</select>
+<span aria-live="polite" class="toolbar-note" id="usersStatus">
+      Carregando usuários...
+     </span>
+</div>
+<div class="table-wrap" id="usersTableWrapper">
+<table class="table">
+<thead>
+<tr>
+<th>
+         Usuário
+        </th>
+<th>
+         Perfil
+        </th>
+<th>
+         Ações
+        </th>
+</tr>
+</thead>
+<tbody id="usersTableBody">
+</tbody>
+</table>
+</div>
+<div aria-live="polite" class="admin-loading" hidden="" id="usersLoading">
+     Carregando usuários...
+    </div>
+<div class="admin-empty" hidden="" id="usersEmpty">
+     Nenhum usuário encontrado.
+    </div>
+<div class="admin-error" hidden="" id="usersError" role="alert">
+</div>
+</section>
+</main>
+<footer class="footer">
+<div class="footer-inner">
+<span>
+     Biblioteca Digital
+    </span>
+<span>
+     Gestão · Controle · Acervo
+    </span>
+</div>
+</footer>
+<div aria-labelledby="userModalTitle" aria-modal="true" class="modal" hidden="" id="userModal" role="dialog">
+<div class="modal-box">
+<h2 id="userModalTitle">
+     Novo usuário
+    </h2>
+<form id="userForm" novalidate="">
+<div class="form-grid">
+<div class="field">
+<label for="userName">
+        Nome
+       </label>
+<input id="userName" name="nome" placeholder="Nome completo" required="" type="text"/>
+</div>
+<div class="field">
+<label for="userEmail">
+        E-mail
+       </label>
+<input autocomplete="email" id="userEmail" name="email" placeholder="email@biblioteca.com" required="" type="email"/>
+</div>
+<div class="field">
+<label for="userPassword">
+        Senha
+       </label>
+<input autocomplete="new-password" id="userPassword" minlength="6" name="senha" placeholder="Mínimo de 6 caracteres" required="" type="password"/>
+</div>
+<div class="field">
+<label for="userType">
+        Perfil
+       </label>
+<select id="userType" name="tipo" required="">
+<option value="CLIENTE">
+         CLIENTE
+        </option>
+<option value="ATENDENTE">
+         ATENDENTE
+        </option>
+<option value="ADM">
+         ADM
+        </option>
+</select>
+<small id="userTypeHelp">
+</small>
+</div>
+</div>
+<div aria-live="polite" class="form-message" id="userFormMessage" role="alert">
+</div>
+<div class="modal-actions">
+<button class="secondary" id="cancelUserButton" type="button">
+       Cancelar
+      </button>
+<button class="secondary" id="closeUserModal" type="button">
+       Fechar
+      </button>
+<button class="primary" id="saveUserButton" type="submit">
+       Cadastrar usuário
+      </button>
+</div>
+</form>
+</div>
+</div>
+<script src="js/config.js"></script>
+<script defer="" src="js/auth.js">
+</script>
+<script defer="" src="js/admin-usuarios.js">
+</script>
+</body>
+</html>

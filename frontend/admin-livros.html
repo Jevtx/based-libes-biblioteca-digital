@@ -1,0 +1,280 @@
+<!DOCTYPE html>
+
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width,initial-scale=1.0" name="viewport"/>
+<title>
+   Livros | Biblioteca Digital
+  </title>
+<link href="css/style.css" rel="stylesheet"/>
+
+</head>
+<body class="admin-page">
+<header class="admin-navbar">
+<nav aria-label="Navegação administrativa" class="admin-navbar-inner">
+<a aria-label="Biblioteca Digital - Início" class="brand" href="index.html">
+<span aria-hidden="true" class="brand-icon">
+      ✦
+     </span>
+<span>
+      Biblioteca
+     </span>
+</a>
+<div class="admin-nav-links">
+<a class="admin-nav-link active" href="admin-livros.html">
+      Livros
+     </a>
+<a class="admin-nav-link" href="admin-usuarios.html">
+      Usuários
+     </a>
+<a class="admin-nav-link" href="admin-emprestimos.html">
+      Empréstimos
+     </a>
+</div>
+<div class="admin-profile">
+<div>
+<div class="admin-user" id="adminBooksUserName">
+       Administrador
+      </div>
+<div class="admin-role" id="adminBooksUserRole">
+       Painel administrativo
+      </div>
+</div>
+<span aria-live="polite" class="admin-profile-badge" id="adminBooksProfileBadge">
+</span>
+<button class="logout" id="adminBooksLogout" type="button">
+      Sair
+     </button>
+</div>
+</nav>
+</header>
+<main class="admin-main">
+<section class="admin-heading">
+<div>
+<span class="eyebrow">
+      PAINEL ADMINISTRATIVO
+     </span>
+<h1>
+      Gestão do
+      <br/>
+<em>
+       acervo.
+      </em>
+</h1>
+<p>
+      Cadastre, edite, pesquise e acompanhe a situação dos livros da biblioteca.
+     </p>
+</div>
+<button class="primary" id="newBookButton" type="button">
+     + Novo cadastro
+    </button>
+</section>
+<section aria-label="Resumo do acervo" class="stats">
+<div class="stat">
+<span class="stat-label">
+      TOTAL DE LIVROS
+     </span>
+<strong class="stat-value" id="adminBooksTotal">
+      0
+     </strong>
+<span class="stat-desc">
+      no catálogo
+     </span>
+</div>
+<div class="stat">
+<span class="stat-label">
+      DISPONÍVEIS
+     </span>
+<strong class="stat-value" id="adminBooksAvailable">
+      0
+     </strong>
+<span class="stat-desc">
+      prontos para empréstimo
+     </span>
+</div>
+<div class="stat">
+<span class="stat-label">
+      EMPRESTADOS
+     </span>
+<strong class="stat-value" id="adminBooksLoaned">
+      0
+     </strong>
+<span class="stat-desc">
+      em circulação
+     </span>
+</div>
+<div class="stat">
+<span class="stat-label">
+      GÊNEROS
+     </span>
+<strong class="stat-value">
+      8
+     </strong>
+<span class="stat-desc">
+      categorias ativas
+     </span>
+</div>
+</section>
+<section aria-label="Lista de livros" class="panel">
+<div class="toolbar">
+<input aria-label="Pesquisar livros" autocomplete="off" class="search" id="adminBooksSearch" placeholder="Pesquisar por título ou autor..." type="search"/>
+<select aria-label="Filtrar por gênero" class="select" id="adminBooksCategoryFilter">
+<option value="">
+       Todos os gêneros
+      </option>
+<option value="Fantasia">
+       Fantasia
+      </option>
+<option value="Romance">
+       Romance
+      </option>
+<option value="Aventura">
+       Aventura
+      </option>
+<option value="Mistério e Policial">
+       Mistério e Policial
+      </option>
+<option value="Terror e Horror">
+       Terror e Horror
+      </option>
+<option value="Distopia">
+       Distopia
+      </option>
+<option value="Drama">
+       Drama
+      </option>
+<option value="Biografia e Memórias">
+       Biografia e Memórias
+      </option>
+</select>
+<span aria-live="polite" class="toolbar-note" id="adminBooksStatus">
+      Carregando acervo...
+     </span>
+</div>
+<div class="table-wrap" id="adminBooksTableWrapper">
+<table class="table">
+<thead>
+<tr>
+<th>
+         Livro
+        </th>
+<th>
+         Categoria
+        </th>
+<th>
+         Ano
+        </th>
+<th>
+         Situação
+        </th>
+<th>
+         Ações
+        </th>
+</tr>
+</thead>
+<tbody id="adminBooksTableBody">
+</tbody>
+</table>
+</div>
+<div aria-live="polite" class="admin-loading" id="adminBooksLoading">
+     Carregando livros...
+    </div>
+<div class="admin-empty" hidden="" id="adminBooksEmpty">
+     Nenhum livro encontrado.
+    </div>
+<div class="admin-error" hidden="" id="adminBooksError" role="alert">
+</div>
+</section>
+</main>
+<footer class="footer">
+<div class="footer-inner">
+<span>
+     Biblioteca Digital
+    </span>
+<span>
+     Gestão · Controle · Acervo
+    </span>
+</div>
+</footer>
+<div aria-labelledby="bookModalTitle" aria-modal="true" class="modal" hidden="" id="bookModal" role="dialog">
+<div class="modal-box">
+<h2 id="bookModalTitle">
+     Novo livro
+    </h2>
+<form id="bookForm" novalidate="">
+<input id="bookId" type="hidden"/>
+<div class="form-grid">
+<div class="field">
+<label for="bookTitle">
+        Título
+       </label>
+<input id="bookTitle" name="titulo" placeholder="Título do livro" required="" type="text"/>
+</div>
+<div class="field">
+<label for="bookAuthor">
+        Autor
+       </label>
+<input id="bookAuthor" name="autor" placeholder="Nome do autor" required="" type="text"/>
+</div>
+<div class="field">
+<label for="bookCategory">
+        Categoria
+       </label>
+<select id="bookCategory" name="categoria" required="">
+<option value="Fantasia">
+         Fantasia
+        </option>
+<option value="Romance">
+         Romance
+        </option>
+<option value="Aventura">
+         Aventura
+        </option>
+<option value="Mistério e Policial">
+         Mistério e Policial
+        </option>
+<option value="Terror e Horror">
+         Terror e Horror
+        </option>
+<option value="Distopia">
+         Distopia
+        </option>
+<option value="Drama">
+         Drama
+        </option>
+<option value="Biografia e Memórias">
+         Biografia e Memórias
+        </option>
+</select>
+</div>
+<div class="field">
+<label for="bookYear">
+        Ano
+       </label>
+<input id="bookYear" max="2100" min="0" name="ano" placeholder="2026" type="number"/>
+</div>
+</div>
+<div aria-live="polite" class="form-message" id="bookFormMessage" role="alert">
+</div>
+<div class="modal-actions">
+<button class="secondary" id="cancelBookButton" type="button">
+       Cancelar
+      </button>
+<button class="secondary" id="closeBookModal" type="button">
+       Fechar
+      </button>
+<button class="primary" id="saveBookButton" type="submit">
+       Cadastrar livro
+      </button>
+</div>
+</form>
+</div>
+</div>
+<script src="js/config.js"></script>
+<script defer="" src="js/auth.js">
+</script>
+<script defer="" src="js/admin-livros.js">
+</script>
+</body>
+</html>

@@ -1,0 +1,1230 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+ <head>
+  <meta charset="utf-8"/>
+  <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+  <title>
+   Based Libes
+  </title>
+  <meta content="Entre em novos mundos atrav&eacute;s dos livros." name="description"/>
+  <link href="css/style.css" rel="stylesheet"/>
+ </head>
+ <body>
+  <!-- =========================================================
+         NAVBAR
+         ========================================================= -->
+  <header class="navbar-wrapper">
+   <nav class="navbar">
+    <a class="brand" href="index.html">
+     <span class="brand-icon">
+      ✦
+     </span>
+     <span>
+      Biblioteca
+     </span>
+    </a>
+    <div class="nav-links">
+     <a class="nav-link active" href="index.html">
+      In&iacute;cio
+     </a>
+     <a class="nav-link" href="livros.html">
+      Livros
+     </a>
+     <a class="nav-link" href="meus-emprestimos.html">
+      Meus empr&eacute;stimos
+     </a>
+    </div>
+    <a class="nav-login" href="login.html">
+     Entrar
+    </a>
+   </nav>
+  </header>
+  <!-- =========================================================
+         HERO
+         ========================================================= -->
+  <main>
+   <section class="hero" id="inicio">
+    <div class="hero-overlay">
+    </div>
+    <div class="hero-content">
+     <span class="hero-label">
+     BASED LIBES - BIBLIOTECA DIGITAL
+     </span>
+     <h1>
+      Entre em novos
+      <br/>
+      <em>
+       mundos.
+      </em>
+     </h1>
+     <p>
+      Hist&oacute;rias para descobrir, personagens para conhecer e mundos para
+                    explorar atrav&eacute;s dos livros.
+     </p>
+     <div class="hero-actions">
+      <a class="btn btn-primary" href="#explore">
+       Explorar livros
+       <span>
+        &rarr;
+       </span>
+      </a>
+      <button class="btn btn-secondary" id="openGenreFilter" type="button">
+       Descobrir g&ecirc;neros
+      </button>
+     </div>
+    </div>
+    <a class="scroll-indicator" href="#explore">
+     <span>
+      SCROLL
+     </span>
+     <span class="scroll-arrow">
+      &darr;
+     </span>
+    </a>
+   </section>
+   <!-- =====================================================
+             INTRODUÇÃO
+             ===================================================== -->
+   <section class="intro-section" id="explore">
+    <div class="intro-content">
+     <span class="section-label">
+      EXPLORE
+     </span>
+     <h2>
+      Cada livro abre
+      <br/>
+      uma nova porta.
+     </h2>
+     <p>
+      Explore diferentes universos liter&aacute;rios e encontre hist&oacute;rias
+                    que combinam com voc&ecirc;.
+     </p>
+    </div>
+   </section>
+   <!-- =====================================================
+             FILTRO / BUSCA POR GÊNERO
+             ===================================================== -->
+   <section aria-label="Buscar por g&ecirc;nero" class="genre-filter-section" id="genreFilterSection">
+    <div class="genre-filter-container">
+     <div class="genre-filter-heading">
+      <span class="section-label">
+       ENCONTRE SUA PR&Oacute;XIMA HIST&Oacute;RIA
+      </span>
+      <h2>
+       Qual mundo voc&ecirc;
+       <br/>
+       quer explorar?
+      </h2>
+     </div>
+     <div class="genre-search">
+      <label for="genreSearch">
+       Buscar g&ecirc;nero
+      </label>
+      <div class="search-wrapper">
+       <span class="search-icon">
+        &telrec;
+       </span>
+       <input autocomplete="off" id="genreSearch" placeholder="Digite um g&ecirc;nero..." type="search"/>
+      </div>
+     </div>
+     <div class="genre-filter-buttons" id="genreFilterButtons">
+      <button class="genre-filter-button active" data-filter="todos" type="button">
+       Todos
+      </button>
+      <button class="genre-filter-button" data-filter="fantasia" type="button">
+       Fantasia
+      </button>
+      <button class="genre-filter-button" data-filter="romance" type="button">
+       Romance
+      </button>
+      <button class="genre-filter-button" data-filter="aventura" type="button">
+       Aventura
+      </button>
+      <button class="genre-filter-button" data-filter="misterio-policial" type="button">
+       Mist&eacute;rio e Policial
+      </button>
+      <button class="genre-filter-button" data-filter="terror-horror" type="button">
+       Terror e Horror
+      </button>
+      <button class="genre-filter-button" data-filter="distopia" type="button">
+       Distopia
+      </button>
+      <button class="genre-filter-button" data-filter="drama" type="button">
+       Drama
+      </button>
+      <!-- GÊNERO 08 -->
+      <button class="genre-filter-button" data-filter="biografia" type="button">
+       Biografia e Mem&oacute;rias
+      </button>
+     </div>
+    </div>
+   </section>
+   <!-- =====================================================
+             GÊNERO 01 — FANTASIA
+             ===================================================== -->
+   <section class="genre-section genre-fantasy" data-genre="fantasia" id="fantasia">
+    <div class="genre-inner">
+     <div class="genre-header">
+      <div class="genre-number">
+       01
+      </div>
+      <span class="section-label">
+       UM UNIVERSO DE POSSIBILIDADES
+      </span>
+      <h2>
+       Fantasia
+      </h2>
+      <p>
+       Onde o imposs&iacute;vel ganha vida.
+      </p>
+     </div>
+     <div class="recommendations">
+      <div class="recommendation-header">
+       <div>
+        <span class="section-label">
+         PRINCIPAIS INDICA&Ccedil;&Otilde;ES
+        </span>
+        <h3>
+         Para explorar novos mundos
+        </h3>
+       </div>
+       <a href="livros.html?genero=fantasia">
+        Ver todos &rarr;
+       </a>
+      </div>
+      <div class="book-grid">
+       <article class="book-card" data-book-id="fantasia-01" data-genre="fantasia" data-title="quarta asa">
+        <div class="book-cover">
+         <img alt="Capa do livro Quarta Asa, de Rebecca Yarros" class="cover-image" decoding="async" loading="lazy" src="css/imagens/Fantasia/quarta asa.jpg"/>
+       
+        </div>
+        <div class="book-info">
+         <span class="book-category">
+          Fantasia
+         </span>
+         <h4 class="book-title">
+          Quarta Asa
+         </h4>
+         <p class="book-author">
+          Rebecca Yarros
+         </p>
+         <span class="book-status available">
+          Dispon&iacute;vel
+         </span>
+        </div>
+       </article>
+       <article class="book-card" data-book-id="fantasia-02" data-genre="fantasia" data-title="onyx storm">
+        <div class="book-cover">
+         <img alt="Capa do livro Onyx Storm, de Rebecca Yarros" class="cover-image" decoding="async" loading="lazy" src="css/imagens/Fantasia/Onyx Storm.jpg"/>
+         
+        </div>
+        <div class="book-info">
+         <span class="book-category">
+          Fantasia
+         </span>
+         <h4 class="book-title">
+          Onyx Storm
+         </h4>
+         <p class="book-author">
+          Rebecca Yarros
+         </p>
+         <span class="book-status available">
+          Dispon&iacute;vel
+         </span>
+        </div>
+       </article>
+       <article class="book-card" data-book-id="fantasia-03" data-genre="fantasia" data-title="alchemised">
+        <div class="book-cover">
+         <img alt="Capa do livro Alchemised, de SenLinYu" class="cover-image" decoding="async" loading="lazy" src="css/imagens/Fantasia/Alchemised.jpg"/>
+         
+        </div>
+        <div class="book-info">
+         <span class="book-category">
+          Fantasia
+         </span>
+         <h4 class="book-title">
+          Alchemised
+         </h4>
+         <p class="book-author">
+          SenLinYu
+         </p>
+         <span class="book-status available">
+          Dispon&iacute;vel
+         </span>
+        </div>
+       </article>
+      </div>
+     </div>
+    </div>
+   </section>
+   <!-- =====================================================
+             GÊNERO 02 — ROMANCE
+             ===================================================== -->
+   <section class="genre-section genre-romance" data-genre="romance" id="romance">
+    <div class="genre-inner">
+     <div class="genre-header">
+      <div class="genre-number">
+       02
+      </div>
+      <span class="section-label">
+       HIST&Oacute;RIAS QUE TOCAM
+      </span>
+      <h2>
+       Romance
+      </h2>
+      <p>
+       Hist&oacute;rias que atravessam p&aacute;ginas e encontram o cora&ccedil;&atilde;o.
+      </p>
+     </div>
+     <div class="recommendations">
+      <div class="recommendation-header">
+       <div>
+        <span class="section-label">
+         PRINCIPAIS INDICA&Ccedil;&Otilde;ES
+        </span>
+        <h3>
+         Para quem acredita nas hist&oacute;rias
+        </h3>
+       </div>
+       <a href="livros.html?genero=romance">
+        Ver todos &rarr;
+       </a>
+      </div>
+      <div class="book-grid">
+       <article class="book-card" data-book-id="romance-01" data-genre="romance" data-title="melhor do que nos filmes">
+        <div class="book-cover">
+         <img alt="Capa do livro Melhor do que nos Filmes, de Lynn Painter" class="cover-image" decoding="async" loading="lazy" src="css/imagens/Romance/Melhor do que nos filmes.jpg"/>
+       
+        </div>
+        <div class="book-info">
+         <span class="book-category">
+          Romance
+         </span>
+         <h4 class="book-title">
+          Melhor do que nos Filmes
+         </h4>
+         <p class="book-author">
+          Lynn Painter
+         </p>
+         <span class="book-status available">
+          Dispon&iacute;vel
+         </span>
+        </div>
+       </article>
+       <article class="book-card" data-book-id="romance-02" data-genre="romance" data-title="uma farsa de amor na espanha">
+        <div class="book-cover">
+         <img alt="Capa do livro Uma Farsa de Amor na Espanha, de Elena Armas" class="cover-image" decoding="async" loading="lazy" src="css/imagens/Romance/Uma Farsa de Amor na Espanha.jpg"/>
+         
+        </div>
+        <div class="book-info">
+         <span class="book-category">
+          Romance
+         </span>
+         <h4 class="book-title">
+          Uma Farsa de Amor na Espanha
+         </h4>
+         <p class="book-author">
+          Elena Armas
+         </p>
+         <span class="book-status available">
+          Dispon&iacute;vel
+         </span>
+        </div>
+       </article>
+       <article class="book-card" data-book-id="romance-03" data-genre="romance" data-title="a hip&oacute;tese do amor">
+        <div class="book-cover">
+         <img alt="Capa do livro A Hip&oacute;tese do Amor, de Ali Hazelwood" class="cover-image" decoding="async" loading="lazy" src="css/imagens/Romance/A Hipótese do Amor.jpg"/>
+         <span class="cover-number">
+          03
+         </span>
+         <span class="cover-icon">
+          ♡
+         </span>
+         <span class="cover-genre">
+          Romance
+         </span>
+        </div>
+        <div class="book-info">
+         <span class="book-category">
+          Romance
+         </span>
+         <h4 class="book-title">
+          A Hip&oacute;tese do Amor
+         </h4>
+         <p class="book-author">
+          Ali Hazelwood
+         </p>
+         <span class="book-status available">
+          Dispon&iacute;vel
+         </span>
+        </div>
+       </article>
+      </div>
+     </div>
+    </div>
+   </section>
+   <!-- =====================================================
+             GÊNERO 03 — AVENTURA
+             ===================================================== -->
+   <section class="genre-section genre-adventure" data-genre="aventura" id="aventura">
+    <div class="genre-inner">
+     <div class="genre-header">
+      <div class="genre-number">
+       03
+      </div>
+      <span class="section-label">
+       AL&Eacute;M DO HORIZONTE
+      </span>
+      <h2>
+       Aventura
+      </h2>
+      <p>
+       Toda p&aacute;gina pode ser o come&ccedil;o de uma grande jornada.
+      </p>
+     </div>
+     <div class="recommendations">
+      <div class="recommendation-header">
+       <div>
+        <span class="section-label">
+         PRINCIPAIS INDICA&Ccedil;&Otilde;ES
+        </span>
+        <h3>
+         Para quem quer ir al&eacute;m
+        </h3>
+       </div>
+       <a href="livros.html?genero=aventura">
+        Ver todos &rarr;
+       </a>
+      </div>
+      <div class="book-grid">
+       <article class="book-card" data-book-id="aventura-01" data-genre="aventura" data-title="a ilha do tesouro">
+        <div class="book-cover">
+         <img alt="Capa do livro A Ilha do Tesouro, de Robert Louis Stevenson" class="cover-image" decoding="async" loading="lazy" src="css/imagens/Aventura/A Ilha do Tesouro.jpg"/>
+        
+        </div>
+        <div class="book-info">
+         <span class="book-category">
+          Aventura
+         </span>
+         <h4 class="book-title">
+          A Ilha do Tesouro
+         </h4>
+         <p class="book-author">
+          Robert Louis Stevenson
+         </p>
+         <span class="book-status available">
+          Dispon&iacute;vel
+         </span>
+        </div>
+       </article>
+       <article class="book-card" data-book-id="aventura-02" data-genre="aventura" data-title="jogador n&ordm; 1">
+        <div class="book-cover">
+         <img alt="Capa do livro Jogador N&ordm; 1, de Ernest Cline" class="cover-image" decoding="async" loading="lazy" src="css/imagens/Aventura/Jogador Nº 1.jpg"/>
+        
+        </div>
+        <div class="book-info">
+         <span class="book-category">
+          Aventura
+         </span>
+         <h4 class="book-title">
+          Jogador N&ordm; 1
+         </h4>
+         <p class="book-author">
+          Ernest Cline
+         </p>
+         <span class="book-status available">
+          Dispon&iacute;vel
+         </span>
+        </div>
+       </article>
+       <article class="book-card" data-book-id="aventura-03" data-genre="aventura" data-title="o mar sem estrelas">
+        <div class="book-cover">
+         <img alt="Capa do livro O Mar Sem Estrelas, de Erin Morgenstern" class="cover-image" decoding="async" loading="lazy" src="css/imagens/Aventura/O Mar Sem Estrelas.jpg"/>
+         
+        </div>
+        <div class="book-info">
+         <span class="book-category">
+          Aventura
+         </span>
+         <h4 class="book-title">
+          O Mar Sem Estrelas
+         </h4>
+         <p class="book-author">
+          Erin Morgenstern
+         </p>
+         <span class="book-status available">
+          Dispon&iacute;vel
+         </span>
+        </div>
+       </article>
+      </div>
+     </div>
+    </div>
+   </section>
+   <!-- =====================================================
+             GÊNERO 04 — MISTÉRIO E POLICIAL
+             ===================================================== -->
+   <section class="genre-section genre-mystery" data-genre="misterio-policial" id="misterio-policial">
+    <div class="genre-inner">
+     <div class="genre-header">
+      <div class="genre-number">
+       04
+      </div>
+      <span class="section-label">
+       NADA &Eacute; O QUE PARECE
+      </span>
+      <h2>
+       Mist&eacute;rio e Policial
+      </h2>
+      <p>
+       Pistas, segredos e hist&oacute;rias que desafiam sua percep&ccedil;&atilde;o.
+      </p>
+     </div>
+     <div class="recommendations">
+      <div class="recommendation-header">
+       <div>
+        <span class="section-label">
+         PRINCIPAIS INDICA&Ccedil;&Otilde;ES
+        </span>
+        <h3>
+         Para quem gosta de desvendar
+        </h3>
+       </div>
+       <a href="livros.html?genero=misterio-policial">
+        Ver todos &rarr;
+       </a>
+      </div>
+      <div class="book-grid">
+       <article class="book-card" data-book-id="misterio-policial-01" data-genre="misterio-policial" data-title="a paciente silenciosa">
+        <div class="book-cover">
+         <img alt="Capa do livro A Paciente Silenciosa, de Alex Michaelides" class="cover-image" decoding="async" loading="lazy" src="css/imagens/Mistério e Policial/A Paciente Silenciosa.jpg"/>
+        
+        </div>
+        <div class="book-info">
+         <span class="book-category">
+          Mist&eacute;rio e Policial
+         </span>
+         <h4 class="book-title">
+          A Paciente Silenciosa
+         </h4>
+         <p class="book-author">
+          Alex Michaelides
+         </p>
+         <span class="book-status available">
+          Dispon&iacute;vel
+         </span>
+        </div>
+       </article>
+       <article class="book-card" data-book-id="misterio-policial-02" data-genre="misterio-policial" data-title="verity">
+        <div class="book-cover">
+         <img alt="Capa do livro Verity, de Colleen Hoover" class="cover-image" decoding="async" loading="lazy" src="css/imagens/Mistério e Policial/Verity.jpg"/>
+         
+        </div>
+        <div class="book-info">
+         <span class="book-category">
+          Mist&eacute;rio e Policial
+         </span>
+         <h4 class="book-title">
+          Verity
+         </h4>
+         <p class="book-author">
+          Colleen Hoover
+         </p>
+         <span class="book-status available">
+          Dispon&iacute;vel
+         </span>
+        </div>
+       </article>
+       <article class="book-card" data-book-id="misterio-policial-03" data-genre="misterio-policial" data-title="a empregada">
+        <div class="book-cover">
+         <img alt="Capa do livro A Empregada, de Freida McFadden" class="cover-image" decoding="async" loading="lazy" src="css/imagens/Mistério e Policial/A Empregada.jpg"/>
+         
+        </div>
+        <div class="book-info">
+         <span class="book-category">
+          Mist&eacute;rio e Policial
+         </span>
+         <h4 class="book-title">
+          A Empregada
+         </h4>
+         <p class="book-author">
+          Freida McFadden
+         </p>
+         <span class="book-status available">
+          Dispon&iacute;vel
+         </span>
+        </div>
+       </article>
+      </div>
+     </div>
+    </div>
+   </section>
+   <!-- =====================================================
+             GÊNERO 05 — TERROR E HORROR
+             ===================================================== -->
+   <section class="genre-section genre-horror" data-genre="terror-horror" id="terror-horror">
+    <div class="genre-inner">
+     <div class="genre-header">
+      <div class="genre-number">
+       05
+      </div>
+      <span class="section-label">
+       ENTRE O MEDO E O DESCONHECIDO
+      </span>
+      <h2>
+       Terror e Horror
+      </h2>
+      <p>
+       Hist&oacute;rias para quem n&atilde;o tem medo de continuar lendo.
+      </p>
+     </div>
+     <div class="recommendations">
+      <div class="recommendation-header">
+       <div>
+        <span class="section-label">
+         PRINCIPAIS INDICA&Ccedil;&Otilde;ES
+        </span>
+        <h3>
+         Para quem gosta de sentir o arrepio
+        </h3>
+       </div>
+       <a href="livros.html?genero=terror-horror">
+        Ver todos &rarr;
+       </a>
+      </div>
+      <div class="book-grid">
+       <article class="book-card" data-book-id="terror-horror-01" data-genre="terror-horror" data-title="a casa infernal">
+        <div class="book-cover">
+         <img alt="Capa do livro A Casa Infernal, de Richard Matheson" class="cover-image" decoding="async" loading="lazy" src="css/imagens/Terror e Horror/A Casa Infernal — Richard Matheson.jpg"/>
+         
+        </div>
+        <div class="book-info">
+         <span class="book-category">
+          Terror e Horror
+         </span>
+         <h4 class="book-title">
+          A Casa Infernal
+         </h4>
+         <p class="book-author">
+          Richard Matheson
+         </p>
+         <span class="book-status available">
+          Dispon&iacute;vel
+         </span>
+        </div>
+       </article>
+       <article class="book-card" data-book-id="terror-horror-02" data-genre="terror-horror" data-title="o exorcista">
+        <div class="book-cover">
+         <img alt="Capa do livro O Exorcista, de William Peter Blatty" class="cover-image" decoding="async" loading="lazy" src="css/imagens/Terror e Horror/O Exorcista — William Peter Blatty.jpg"/>
+         
+        </div>
+        <div class="book-info">
+         <span class="book-category">
+          Terror e Horror
+         </span>
+         <h4 class="book-title">
+          O Exorcista
+         </h4>
+         <p class="book-author">
+          William Peter Blatty
+         </p>
+         <span class="book-status available">
+          Dispon&iacute;vel
+         </span>
+        </div>
+       </article>
+       <article class="book-card" data-book-id="terror-horror-03" data-genre="terror-horror" data-title="it: a coisa">
+        <div class="book-cover">
+         <img alt="Capa do livro It: A Coisa, de Stephen King" class="cover-image" decoding="async" loading="lazy" src="css/imagens/Terror e Horror/It- A Coisa — Stephen King.jpg"/>
+         
+        </div>
+        <div class="book-info">
+         <span class="book-category">
+          Terror e Horror
+         </span>
+         <h4 class="book-title">
+          It: A Coisa
+         </h4>
+         <p class="book-author">
+          Stephen King
+         </p>
+         <span class="book-status available">
+          Dispon&iacute;vel
+         </span>
+        </div>
+       </article>
+      </div>
+     </div>
+    </div>
+   </section>
+   <!-- =====================================================
+             GÊNERO 06 — DISTOPIA
+             ===================================================== -->
+   <section class="genre-section genre-dystopia" data-genre="distopia" id="distopia">
+    <div class="genre-inner">
+     <div class="genre-header">
+      <div class="genre-number">
+       06
+      </div>
+      <span class="section-label">
+       UM FUTURO DIFERENTE
+      </span>
+      <h2>
+       Distopia
+      </h2>
+      <p>
+       Mundos imaginados que fazem voc&ecirc; questionar o nosso.
+      </p>
+     </div>
+     <div class="recommendations">
+      <div class="recommendation-header">
+       <div>
+        <span class="section-label">
+         PRINCIPAIS INDICA&Ccedil;&Otilde;ES
+        </span>
+        <h3>
+         Para imaginar outros futuros
+        </h3>
+       </div>
+       <a href="livros.html?genero=distopia">
+        Ver todos &rarr;
+       </a>
+      </div>
+      <div class="book-grid">
+       <article class="book-card" data-book-id="distopia-01" data-genre="distopia" data-title="jogos vorazes">
+        <div class="book-cover">
+         <img alt="Capa do livro Jogos Vorazes, de Suzanne Collins" class="cover-image" decoding="async" loading="lazy" src="css/imagens/Distopia/Jogos Vorazes.jpg"/>
+        
+         </span>
+        </div>
+        <div class="book-info">
+         <span class="book-category">
+          Distopia
+         </span>
+         <h4 class="book-title">
+          Jogos Vorazes
+         </h4>
+         <p class="book-author">
+          Suzanne Collins
+         </p>
+         <span class="book-status available">
+          Dispon&iacute;vel
+         </span>
+        </div>
+       </article>
+       <article class="book-card" data-book-id="distopia-02" data-genre="distopia" data-title="a cantiga dos p&aacute;ssaros e das serpentes">
+        <div class="book-cover">
+         <img alt="Capa do livro A Cantiga dos P&aacute;ssaros e das Serpentes, de Suzanne Collins" class="cover-image" decoding="async" loading="lazy" src="css/imagens/Distopia/A Cantiga dos Pássaros e das Serpentes.jpg"/>
+         
+        </div>
+        <div class="book-info">
+         <span class="book-category">
+          Distopia
+         </span>
+         <h4 class="book-title">
+          A Cantiga dos P&aacute;ssaros e das Serpentes
+         </h4>
+         <p class="book-author">
+          Suzanne Collins
+         </p>
+         <span class="book-status available">
+          Dispon&iacute;vel
+         </span>
+        </div>
+       </article>
+       <article class="book-card" data-book-id="distopia-03" data-genre="distopia" data-title="1984">
+        <div class="book-cover">
+         <img alt="Capa do livro 1984, de George Orwell" class="cover-image" decoding="async" loading="lazy" src="css/imagens/Distopia/1984.jpg"/>
+         
+        </div>
+        <div class="book-info">
+         <span class="book-category">
+          Distopia
+         </span>
+         <h4 class="book-title">
+          1984
+         </h4>
+         <p class="book-author">
+          George Orwell
+         </p>
+         <span class="book-status available">
+          Dispon&iacute;vel
+         </span>
+        </div>
+       </article>
+      </div>
+     </div>
+    </div>
+   </section>
+   <!-- =====================================================
+             GÊNERO 07 — DRAMA
+             ===================================================== -->
+   <section class="genre-section genre-drama" data-genre="drama" id="drama">
+    <div class="genre-inner">
+     <div class="genre-header">
+      <div class="genre-number">
+       07
+      </div>
+      <span class="section-label">
+       HIST&Oacute;RIAS HUMANAS
+      </span>
+      <h2>
+       Drama
+      </h2>
+      <p>
+       Personagens, escolhas e emo&ccedil;&otilde;es que permanecem com voc&ecirc;.
+      </p>
+     </div>
+     <div class="recommendations">
+      <div class="recommendation-header">
+       <div>
+        <span class="section-label">
+         PRINCIPAIS INDICA&Ccedil;&Otilde;ES
+        </span>
+        <h3>
+         Para hist&oacute;rias que deixam marcas
+        </h3>
+       </div>
+       <a href="livros.html?genero=drama">
+        Ver todos &rarr;
+       </a>
+      </div>
+      <div class="book-grid">
+       <article class="book-card" data-book-id="drama-01" data-genre="drama" data-title="tudo &eacute; rio">
+        <div class="book-cover">
+         <img alt="Capa do livro Tudo &eacute; Rio, de Carla Madeira" class="cover-image" decoding="async" loading="lazy" src="css/imagens/Drama/Tudo é Rio.jpg"/>
+         
+        </div>
+        <div class="book-info">
+         <span class="book-category">
+          Drama
+         </span>
+         <h4 class="book-title">
+          Tudo &eacute; Rio
+         </h4>
+         <p class="book-author">
+          Carla Madeira
+         </p>
+         <span class="book-status available">
+          Dispon&iacute;vel
+         </span>
+        </div>
+       </article>
+       <article class="book-card" data-book-id="drama-02" data-genre="drama" data-title="v&eacute;spera">
+        <div class="book-cover">
+         <img alt="Capa do livro V&eacute;spera, de Carla Madeira" class="cover-image" decoding="async" loading="lazy" src="css/imagens/Drama/Véspera.jpg"/>
+         
+        </div>
+        <div class="book-info">
+         <span class="book-category">
+          Drama
+         </span>
+         <h4 class="book-title">
+          V&eacute;spera
+         </h4>
+         <p class="book-author">
+          Carla Madeira
+         </p>
+         <span class="book-status available">
+          Dispon&iacute;vel
+         </span>
+        </div>
+       </article>
+       <article class="book-card" data-book-id="drama-03" data-genre="drama" data-title="torto arado">
+        <div class="book-cover">
+         <img alt="Capa do livro Torto Arado, de Itamar Vieira Junior" class="cover-image" decoding="async" loading="lazy" src="css/imagens/Drama/Torto Arado.jpg"/>
+         
+        </div>
+        <div class="book-info">
+         <span class="book-category">
+          Drama
+         </span>
+         <h4 class="book-title">
+          Torto Arado
+         </h4>
+         <p class="book-author">
+          Itamar Vieira Junior
+         </p>
+         <span class="book-status available">
+          Dispon&iacute;vel
+         </span>
+        </div>
+       </article>
+      </div>
+     </div>
+    </div>
+   </section>
+   <!-- =====================================================
+             GÊNERO 08 — COMÉDIA
+             ===================================================== -->
+   <section class="genre-section genre-comedy genre-biography" data-genre="biografia" id="biografia">
+    <div class="genre-inner">
+     <div class="genre-header">
+      <div class="genre-number">
+       08
+      </div>
+      <span class="section-label">
+       HIST&Oacute;RIAS REAIS
+      </span>
+      <h2>
+       Biografia e Mem&oacute;rias
+      </h2>
+      <p>
+       Hist&oacute;rias reais, experi&ecirc;ncias marcantes e vidas que inspiram.
+      </p>
+     </div>
+     <div class="recommendations">
+      <div class="recommendation-header">
+       <div>
+        <span class="section-label">
+         PRINCIPAIS INDICA&Ccedil;&Otilde;ES
+        </span>
+        <h3>
+         Para conhecer hist&oacute;rias que inspiram
+        </h3>
+       </div>
+       <a href="livros.html?genero=biografia">
+        Ver todos &rarr;
+       </a>
+      </div>
+      <div class="book-grid">
+       <article class="book-card" data-book-id="biografia-01" data-genre="biografia" data-title="uma educa&ccedil;&atilde;o">
+        <div class="book-cover">
+         <img alt="Capa do livro Uma Educa&ccedil;&atilde;o, de Tara Westover" class="cover-image" decoding="async" loading="lazy" src="css/imagens/Biografia e Memórias/Uma Educação.jpg"/>
+         
+        </div>
+        <div class="book-info">
+         <span class="book-category">
+          Biografia e Mem&oacute;rias
+         </span>
+         <h4 class="book-title">
+          Uma Educa&ccedil;&atilde;o
+         </h4>
+         <p class="book-author">
+          Tara Westover
+         </p>
+         <span class="book-status available">
+          Dispon&iacute;vel
+         </span>
+        </div>
+       </article>
+       <article class="book-card" data-book-id="biografia-02" data-genre="biografia" data-title="becoming">
+        <div class="book-cover">
+         <img alt="Capa do livro Becoming, de Michelle Obama" class="cover-image" decoding="async" loading="lazy" src="css/imagens/Biografia e Memórias/Becoming.jpg"/>
+         
+        </div>
+        <div class="book-info">
+         <span class="book-category">
+          Biografia e Mem&oacute;rias
+         </span>
+         <h4 class="book-title">
+          Becoming
+         </h4>
+         <p class="book-author">
+          Michelle Obama
+         </p>
+         <span class="book-status available">
+          Dispon&iacute;vel
+         </span>
+        </div>
+       </article>
+       <article class="book-card" data-book-id="biografia-03" data-genre="biografia" data-title="o di&aacute;rio de anne frank">
+        <div class="book-cover">
+         <img alt="Capa do livro O Di&aacute;rio de Anne Frank, de Anne Frank" class="cover-image" decoding="async" loading="lazy" src="css/imagens/Biografia e Memórias/O Diário de Anne Frank.jpg"/>
+         
+        </div>
+        <div class="book-info">
+         <span class="book-category">
+          Biografia e Mem&oacute;rias
+         </span>
+         <h4 class="book-title">
+          O Di&aacute;rio de Anne Frank
+         </h4>
+         <p class="book-author">
+          Anne Frank
+         </p>
+         <span class="book-status available">
+          Dispon&iacute;vel
+         </span>
+        </div>
+       </article>
+      </div>
+     </div>
+    </div>
+   </section>
+   <!-- =====================================================
+             CTA FINAL
+             ===================================================== -->
+   <section class="final-cta">
+    <div class="final-cta-content">
+     <span class="section-label">
+      SUA PR&Oacute;XIMA HIST&Oacute;RIA
+     </span>
+     <h2>
+      Existe um mundo
+      <br/>
+      esperando por voc&ecirc;.
+     </h2>
+     <p>
+      Encontre seu pr&oacute;ximo livro e comece uma nova jornada.
+     </p>
+     <a class="btn btn-primary" href="livros.html">
+      Explorar biblioteca
+      <span>
+       &rarr;
+      </span>
+     </a>
+    </div>
+   </section>
+  </main>
+  <!-- =========================================================
+         FOOTER
+         ========================================================= -->
+  <footer class="footer">
+   <div class="footer-content">
+    <a class="brand" href="index.html">
+     <span class="brand-icon">
+      ✦
+     </span>
+     <span>
+      Biblioteca
+     </span>
+    </a>
+    <p>
+     Hist&oacute;rias para descobrir novos mundos.
+    </p>
+    <span class="footer-copy">
+     &copy; 2026 Biblioteca Digital
+    </span>
+   </div>
+  </footer>
+  <!-- =========================================================
+         JAVASCRIPT DA BUSCA/FILTRO
+         ========================================================= -->
+  <script src="js/config.js"></script>
+<script>
+   document.addEventListener("DOMContentLoaded", () => {
+
+            const filterSection =
+                document.getElementById("genreFilterSection");
+
+            const openFilterButton =
+                document.getElementById("openGenreFilter");
+
+            const searchInput =
+                document.getElementById("genreSearch");
+
+            const filterButtons =
+                document.querySelectorAll(".genre-filter-button");
+
+            const genreSections =
+                document.querySelectorAll(".genre-section");
+
+
+            /*
+             * Botão "Descobrir gêneros"
+             */
+
+            if (openFilterButton) {
+
+                openFilterButton.addEventListener("click", () => {
+
+                    filterSection.scrollIntoView({
+                        behavior: "smooth",
+                        block: "start"
+                    });
+
+                    setTimeout(() => {
+
+                        searchInput.focus();
+
+                    }, 500);
+
+                });
+
+            }
+
+
+            /*
+             * Função principal do filtro
+             */
+
+            function filterGenres(value) {
+
+                const normalizedValue =
+                    value
+                        .toLowerCase()
+                        .normalize("NFD")
+                        .replace(/[\u0300-\u036f]/g, "");
+
+
+                genreSections.forEach(section => {
+
+                    const genre =
+                        section.dataset.genre || "";
+
+                    const title =
+                        section.querySelector("h2")?.textContent || "";
+
+                    const searchableText =
+                        `${genre} ${title}`
+                            .toLowerCase()
+                            .normalize("NFD")
+                            .replace(/[\u0300-\u036f]/g, "");
+
+
+                    if (
+                        !normalizedValue ||
+                        searchableText.includes(normalizedValue)
+                    ) {
+
+                        section.classList.remove("genre-hidden");
+
+                    } else {
+
+                        section.classList.add("genre-hidden");
+
+                    }
+
+                });
+
+            }
+
+
+            /*
+             * Campo de busca
+             */
+
+            if (searchInput) {
+
+                searchInput.addEventListener("input", event => {
+
+                    filterGenres(event.target.value);
+
+
+                    /*
+                     * Quando o usuário começa a digitar,
+                     * retiramos o estado "Todos".
+                     */
+
+                    if (event.target.value.trim() !== "") {
+
+                        filterButtons.forEach(button => {
+
+                            button.classList.remove("active");
+
+                        });
+
+                    } else {
+
+                        filterButtons.forEach(button => {
+
+                            button.classList.remove("active");
+
+                        });
+
+                        document
+                            .querySelector('[data-filter="todos"]')
+                            ?.classList.add("active");
+
+                    }
+
+                });
+
+            }
+
+
+            /*
+             * Botões de gênero
+             */
+
+            filterButtons.forEach(button => {
+
+                button.addEventListener("click", () => {
+
+                    const selectedGenre =
+                        button.dataset.filter;
+
+
+                    filterButtons.forEach(item => {
+
+                        item.classList.remove("active");
+
+                    });
+
+                    button.classList.add("active");
+
+
+                    /*
+                     * Limpa a busca textual quando
+                     * o usuário escolhe um botão.
+                     */
+
+                    if (searchInput) {
+
+                        searchInput.value = "";
+
+                    }
+
+
+                    if (selectedGenre === "todos") {
+
+                        genreSections.forEach(section => {
+
+                            section.classList.remove("genre-hidden");
+
+                        });
+
+                        return;
+
+                    }
+
+
+                    genreSections.forEach(section => {
+
+                        if (
+                            section.dataset.genre === selectedGenre
+                        ) {
+
+                            section.classList.remove("genre-hidden");
+
+                        } else {
+
+                            section.classList.add("genre-hidden");
+
+                        }
+
+                    });
+
+
+                    /*
+                     * Leva suavemente até o gênero escolhido.
+                     */
+
+                    const selectedSection =
+                        document.querySelector(
+                            `[data-genre="${selectedGenre}"]`
+                        );
+
+
+                    if (selectedSection) {
+
+                        setTimeout(() => {
+
+                            selectedSection.scrollIntoView({
+                                behavior: "smooth",
+                                block: "start"
+                            });
+
+                        }, 100);
+
+                    }
+
+                });
+
+            });
+
+        });
+  </script>
+ </body>
+</html>

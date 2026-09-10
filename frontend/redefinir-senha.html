@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Nova senha | Biblioteca Digital</title>
+<meta content="Crie uma nova senha para sua conta na Biblioteca Digital." name="description"/>
+<link href="css/style.css" rel="stylesheet"/>
+
+</head>
+<body class="auth-page auth-reset-page">
+<!-- =====================================================
+         NAVBAR
+         ===================================================== -->
+<header class="navbar-wrapper">
+<nav class="navbar">
+<a class="brand" href="index.html">
+<span class="brand-icon">
+                    ✦
+                </span>
+<span>
+                    Biblioteca
+                </span>
+</a>
+<div class="nav-links">
+<a class="nav-link" href="index.html">
+                    Início
+                </a>
+<a class="nav-link" href="livros.html">
+                    Livros
+                </a>
+</div>
+<a class="nav-login" href="login.html">
+                Entrar
+            </a>
+</nav>
+</header>
+<!-- =====================================================
+         CONTEÚDO
+         ===================================================== -->
+<main class="auth-page">
+<section aria-labelledby="tituloNovaSenha" class="auth-card">
+<span class="auth-label">
+                NOVA SENHA
+            </span>
+<h1 id="tituloNovaSenha">
+                Crie sua nova senha.
+            </h1>
+<p>
+                Escolha uma senha com pelo menos
+                6 caracteres. Depois disso, você
+                poderá entrar novamente na sua conta.
+            </p>
+<!-- =================================================
+                 FORMULÁRIO
+                 ================================================= -->
+<form class="auth-form" id="redefinirSenhaForm" novalidate="">
+<!-- TOKEN -->
+<div class="form-group">
+<label for="token">
+                        Token de recuperação
+                    </label>
+<input autocomplete="off" class="token-field" id="token" name="token" placeholder="Token recebido no link" required="" type="text"/>
+</div>
+<!-- NOVA SENHA -->
+<div class="form-group">
+<label for="novaSenha">
+                        Nova senha
+                    </label>
+<div class="password-field">
+<input autocomplete="new-password" id="novaSenha" minlength="6" name="novaSenha" placeholder="Mínimo de 6 caracteres" required="" type="password"/>
+<button aria-label="Mostrar senha" class="password-toggle" data-target="novaSenha" type="button">
+                            Mostrar
+                        </button>
+</div>
+</div>
+<!-- CONFIRMAÇÃO -->
+<div class="form-group">
+<label for="confirmarNovaSenha">
+                        Confirmar nova senha
+                    </label>
+<div class="password-field">
+<input autocomplete="new-password" id="confirmarNovaSenha" minlength="6" name="confirmarNovaSenha" placeholder="Digite a senha novamente" required="" type="password"/>
+<button aria-label="Mostrar senha" class="password-toggle" data-target="confirmarNovaSenha" type="button">
+                            Mostrar
+                        </button>
+</div>
+</div>
+<button class="auth-submit" id="redefinirSenhaSubmit" type="submit">
+                    Redefinir senha
+                </button>
+<div aria-live="polite" class="auth-message" hidden="" id="redefinirSenhaMessage" role="alert"></div>
+</form>
+<div class="auth-footer">
+<a href="login.html">
+                    Voltar para o login
+                </a>
+</div>
+</section>
+</main>
+<!-- =====================================================
+         JAVASCRIPT
+         ===================================================== -->
+<script src="js/config.js"></script>
+<script src="js/auth.js"></script>
+</body>
+</html>
