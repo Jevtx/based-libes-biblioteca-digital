@@ -20,10 +20,10 @@ from routes.emprestimos_routes import emprestimos_bp
 
 app = Flask(__name__)
 
-app.config["JWT_SECRET_KEY"] = os.getenv(
-    "JWT_SECRET_KEY",
-    "CHAVE-SECRETA-ALTERE-EM-PRODUCAO",
-)
+secret = os.getenv("JWT_SECRET_KEY")
+if not secret:
+    raise RuntimeError("Defina JWT_SECRET_KEY no ambiente ou no .env.")
+app.config["JWT_SECRET_KEY"] = secret
 
 # Origens autorizadas a chamar a API. Em desenvolvimento, o Live Server
 # do VS Code roda em localhost:5500. Em produção, adicione a URL do seu
@@ -73,7 +73,7 @@ def inicio():
 
 if __name__ == "__main__":
     app.run(
-        debug=True,
-        host="0.0.0.0",
+        debug=os.getenv("FLASK_DEBUG") == "1",
+        host="127.0.0.1",
         port=5000,
     )
