@@ -1,9 +1,9 @@
 "use strict";
 
-/* ============================================================
+/*
    ADMIN - GESTÃO DE USUÁRIOS
    Biblioteca Digital
-   ============================================================ */
+ */
 
 const ADMIN_USERS_API_BASE_URL =
     window.API_BASE_URL || "http://127.0.0.1:5000";
@@ -34,9 +34,9 @@ const AdminUsuariosPage = {
 const usuariosElementos = {};
 
 
-/* ============================================================
+/* 
    ELEMENTOS
-   ============================================================ */
+ */
 
 function capturarElementosUsuarios() {
 
@@ -128,9 +128,9 @@ function capturarElementosUsuarios() {
 }
 
 
-/* ============================================================
+/* 
    SESSÃO
-   ============================================================ */
+ */
 
 function obterUsuarioAtual() {
 
@@ -169,9 +169,9 @@ function obterTokenUsuarios() {
 }
 
 
-/* ============================================================
+/* 
    VERIFICAR ACESSO
-   ============================================================ */
+ */
 
 function verificarAcessoUsuarios() {
 
@@ -220,9 +220,9 @@ function verificarAcessoUsuarios() {
 }
 
 
-/* ============================================================
+/* 
    INFORMAÇÕES DO USUÁRIO LOGADO
-   ============================================================ */
+ */
 
 function carregarInformacoesUsuario() {
 
@@ -272,9 +272,9 @@ function carregarInformacoesUsuario() {
 }
 
 
-/* ============================================================
+/* 
    REGRA DE TIPOS
-   ============================================================ */
+ */
 
 function configurarTiposPermitidos() {
 
@@ -335,9 +335,9 @@ function configurarTiposPermitidos() {
 }
 
 
-/* ============================================================
+/* 
    HEADERS
-   ============================================================ */
+ */
 
 function obterHeadersUsuarios() {
 
@@ -361,9 +361,9 @@ function obterHeadersUsuarios() {
 }
 
 
-/* ============================================================
+/* 
    REQUISIÇÃO
-   ============================================================ */
+ */
 
 async function requisicaoUsuarios(
     endpoint,
@@ -515,9 +515,9 @@ async function requisicaoUsuarios(
 }
 
 
-/* ============================================================
+/* 
    EXTRAIR LISTA
-   ============================================================ */
+ */
 
 function extrairListaUsuarios(dados) {
 
@@ -553,9 +553,9 @@ function extrairListaUsuarios(dados) {
 }
 
 
-/* ============================================================
+/* 
    NORMALIZAR
-   ============================================================ */
+ */
 
 function normalizarUsuario(usuario) {
 
@@ -590,9 +590,9 @@ function normalizarUsuario(usuario) {
 }
 
 
-/* ============================================================
+/* 
    CARREGAR USUÁRIOS
-   ============================================================ */
+ */
 
 async function carregarUsuarios() {
 
@@ -655,9 +655,9 @@ async function carregarUsuarios() {
 }
 
 
-/* ============================================================
+/* 
    FILTROS
-   ============================================================ */
+ */
 
 function aplicarFiltrosUsuarios() {
 
@@ -712,9 +712,9 @@ function aplicarFiltrosUsuarios() {
 }
 
 
-/* ============================================================
+/* 
    RENDERIZAR
-   ============================================================ */
+ */
 
 function renderizarUsuarios() {
 
@@ -877,9 +877,9 @@ function renderizarUsuarios() {
 }
 
 
-/* ============================================================
+/* 
    BADGE
-   ============================================================ */
+ */
 
 function criarBadgeUsuario(tipo) {
 
@@ -928,9 +928,9 @@ function criarBadgeUsuario(tipo) {
 }
 
 
-/* ============================================================
+/* 
    INDICADORES
-   ============================================================ */
+ */
 
 function atualizarIndicadoresUsuarios() {
 
@@ -992,9 +992,9 @@ function atualizarIndicadoresUsuarios() {
 }
 
 
-/* ============================================================
+/* 
    MODAL
-   ============================================================ */
+ */
 
 function abrirModalUsuario() {
 
@@ -1052,9 +1052,9 @@ function fecharModalUsuario() {
 }
 
 
-/* ============================================================
+/* 
    FORMULÁRIO
-   ============================================================ */
+ */
 
 function limparFormularioUsuario() {
 
@@ -1121,9 +1121,9 @@ function mostrarMensagemFormularioUsuario(
 }
 
 
-/* ============================================================
+/* 
    VALIDAÇÃO
-   ============================================================ */
+ */
 
 function obterDadosFormularioUsuario() {
 
@@ -1247,9 +1247,9 @@ function obterDadosFormularioUsuario() {
 }
 
 
-/* ============================================================
+/* 
    CADASTRAR
-   ============================================================ */
+ */
 
 async function cadastrarUsuario(evento) {
 
@@ -1356,9 +1356,9 @@ async function cadastrarUsuario(evento) {
 }
 
 
-/* ============================================================
+/* 
    EXCLUIR
-   ============================================================ */
+ */
 
 async function excluirUsuario(id) {
 
@@ -1473,9 +1473,9 @@ async function excluirUsuario(id) {
 }
 
 
-/* ============================================================
+/* 
    AÇÕES DA TABELA
-   ============================================================ */
+ */
 
 function tratarAcaoUsuario(evento) {
 
@@ -1509,9 +1509,9 @@ function tratarAcaoUsuario(evento) {
 }
 
 
-/* ============================================================
+/* 
    ESTADOS
-   ============================================================ */
+ */
 
 function esconderEstadosUsuarios() {
 
@@ -1573,9 +1573,9 @@ function mostrarErroUsuarios(
 }
 
 
-/* ============================================================
+/* 
    LOGOUT
-   ============================================================ */
+ */
 
 function sairUsuarios() {
 
@@ -1603,9 +1603,9 @@ function sairUsuarios() {
 }
 
 
-/* ============================================================
+/* 
    TECLADO / MODAL
-   ============================================================ */
+ */
 
 function tratarTeclaUsuarios(
     evento
@@ -1624,9 +1624,9 @@ function tratarTeclaUsuarios(
 }
 
 
-/* ============================================================
+/* 
    SEGURANÇA HTML
-   ============================================================ */
+ */
 
 function escaparHTML(valor) {
 
@@ -1660,9 +1660,9 @@ function escaparAtributo(valor) {
 }
 
 
-/* ============================================================
+/* 
    EVENTOS
-   ============================================================ */
+ */
 
 function configurarEventosUsuarios() {
 
@@ -1745,9 +1745,9 @@ function configurarEventosUsuarios() {
 }
 
 
-/* ============================================================
+/* 
    INICIALIZAÇÃO
-   ============================================================ */
+ */
 
 async function iniciarAdminUsuarios() {
 
@@ -1778,9 +1778,9 @@ document.addEventListener(
 );
 
 
-/* ============================================================
+/* 
    API PÚBLICA
-   ============================================================ */
+ */
 
 window.BibliotecaAdminUsuarios = {
 

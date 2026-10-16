@@ -1,9 +1,7 @@
 "use strict";
 
 /*
-=========================================================
  ADMINISTRAÇÃO DE LIVROS
-=========================================================
 
 Responsabilidades:
 
@@ -26,7 +24,6 @@ GET    /livros
 POST   /livros
 PUT    /livros/{id}
 DELETE /livros/{id}
-=========================================================
 */
 
 const AdminLivrosPage = {
@@ -48,9 +45,9 @@ const AdminLivrosPage = {
         this.carregarLivros();
     },
 
-    /* =====================================================
+    /* 
        DOM
-       ===================================================== */
+     */
 
     capturarElementos() {
         this.elementos = {
@@ -158,9 +155,9 @@ const AdminLivrosPage = {
         };
     },
 
-    /* =====================================================
+    /*
        AUTENTICAÇÃO / AUTORIZAÇÃO
-       ===================================================== */
+     */
 
     validarAcesso() {
         const token =
@@ -231,9 +228,9 @@ const AdminLivrosPage = {
         return this.obterUsuarioDoStorage();
     },
 
-    /* =====================================================
+    /*
        USUÁRIO
-       ===================================================== */
+     */
 
     exibirUsuario() {
         const usuario = this.obterUsuario();
@@ -282,9 +279,9 @@ const AdminLivrosPage = {
         );
     },
 
-    /* =====================================================
+    /*
        EVENTOS
-       ===================================================== */
+     */
 
     configurarEventos() {
         this.elementos.search?.addEventListener(
@@ -383,9 +380,9 @@ const AdminLivrosPage = {
             "login.html";
     },
 
-    /* =====================================================
+    /*
        API
-       ===================================================== */
+     */
 
     async carregarLivros() {
         this.mostrarLoading();
@@ -581,9 +578,9 @@ const AdminLivrosPage = {
         return padrao;
     },
 
-    /* =====================================================
+    /*
        NORMALIZAÇÃO
-       ===================================================== */
+     */
 
     normalizarLivros() {
         this.livros =
@@ -628,9 +625,9 @@ const AdminLivrosPage = {
             );
     },
 
-    /* =====================================================
+    /*
        FILTROS
-       ===================================================== */
+     */
 
     atualizarCategorias() {
         const select =
@@ -772,9 +769,9 @@ const AdminLivrosPage = {
         this.renderizarLivros();
     },
 
-    /* =====================================================
+    /*
        ESTATÍSTICAS
-       ===================================================== */
+     */
 
     atualizarEstatisticas() {
         const total =
@@ -833,9 +830,9 @@ const AdminLivrosPage = {
         );
     },
 
-    /* =====================================================
+    /*
        RENDERIZAÇÃO
-       ===================================================== */
+     */
 
     renderizarLivros() {
         const tbody =
@@ -1150,9 +1147,9 @@ const AdminLivrosPage = {
         );
     },
 
-    /* =====================================================
+    /*
        MODAL — NOVO LIVRO
-       ===================================================== */
+     */
 
     abrirModalNovoLivro() {
         this.livroEmEdicao =
@@ -1178,9 +1175,9 @@ const AdminLivrosPage = {
         );
     },
 
-    /* =====================================================
+    /*
        MODAL — EDITAR LIVRO
-       ===================================================== */
+     */
 
     abrirModalEdicao(
         livro
@@ -1270,9 +1267,9 @@ const AdminLivrosPage = {
             "";
     },
 
-    /* =====================================================
+    /*
        SALVAR
-       ===================================================== */
+     */
 
     async salvarLivro() {
         this.limparMensagemFormulario();
@@ -1500,9 +1497,9 @@ const AdminLivrosPage = {
         }
     },
 
-    /* =====================================================
+    /*
        EXCLUIR
-       ===================================================== */
+     */
 
     async excluirLivro(
         livro
@@ -1609,9 +1606,9 @@ const AdminLivrosPage = {
         }
     },
 
-    /* =====================================================
+    /*
        MENSAGENS
-       ===================================================== */
+     */
 
     mostrarLoading() {
         this.elementos.loading?.classList.remove(
@@ -1718,9 +1715,9 @@ const AdminLivrosPage = {
     },
 };
 
-/* =========================================================
+/*
    INICIALIZAÇÃO
-   ========================================================= */
+ */
 
 document.addEventListener(
     "DOMContentLoaded",
@@ -1729,10 +1726,10 @@ document.addEventListener(
     }
 );
 
-/* =========================================================
+/*
    DISPONIBILIZAÇÃO GLOBAL
    Útil para testes pelo console do navegador.
-   ========================================================= */
+ */
 
 window.BibliotecaAdminLivros =
     AdminLivrosPage;

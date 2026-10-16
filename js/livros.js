@@ -1,8 +1,6 @@
-/* ============================================================
-   BIBLIOTECA DIGITAL
-   LIVROS.JS
+/* 
    Busca, filtros, sincronização do acervo e empréstimos
-   ============================================================ */
+ */
 
 "use strict";
 
@@ -53,9 +51,9 @@ const GENEROS = {
     ]
 };
 
-/* ============================================================
+/*
    NORMALIZAÇÃO
-   ============================================================ */
+ */
 
 function normalizarTexto(texto) {
     return String(texto || "")
@@ -119,9 +117,9 @@ function textoContemGenero(texto, genero) {
     });
 }
 
-/* ============================================================
+/*
    ELEMENTOS
-   ============================================================ */
+ */
 
 function obterElementos() {
     return {
@@ -133,9 +131,9 @@ function obterElementos() {
     };
 }
 
-/* ============================================================
+/*
    FILTRO / BUSCA
-   ============================================================ */
+ */
 
 function cardCorrespondePesquisa(card, pesquisa) {
     if (!pesquisa) {
@@ -228,9 +226,9 @@ function aplicarFiltros() {
     }
 }
 
-/* ============================================================
+/*
    FILTROS DE GÊNERO
-   ============================================================ */
+ */
 
 function configurarFiltros() {
     const elementos = obterElementos();
@@ -273,9 +271,9 @@ function configurarFiltros() {
         });
 }
 
-/* ============================================================
+/*
    BUSCA POR TÍTULO, AUTOR OU GÊNERO
-   ============================================================ */
+*/
 
 function configurarBusca() {
     const elementos = obterElementos();
@@ -290,9 +288,9 @@ function configurarBusca() {
     });
 }
 
-/* ============================================================
+/*
    URL
-   ============================================================ */
+*/
 
 function configurarParametroInicial() {
     const parametro = new URLSearchParams(window.location.search)
@@ -321,9 +319,9 @@ function configurarParametroInicial() {
         });
 }
 
-/* ============================================================
+/*
    SINCRONIZAÇÃO COM A API
-   ============================================================ */
+ */
 
 function atualizarCardComLivro(card, livro) {
     const situacao = normalizarTexto(livro?.situacao);
@@ -481,9 +479,9 @@ async function sincronizarCatalogo(tentativa = 1) {
     }
 }
 
-/* ============================================================
+/*
    EMPRÉSTIMO
-   ============================================================ */
+*/
 
 async function solicitarEmprestimo(botao) {
     const livroId = botao?.dataset.livroId;
@@ -579,9 +577,9 @@ function configurarEmprestimos() {
     });
 }
 
-/* ============================================================
+/*
    INICIALIZAÇÃO
-   ============================================================ */
+*/
 
 document.addEventListener("DOMContentLoaded", () => {
     configurarParametroInicial();
@@ -592,9 +590,9 @@ document.addEventListener("DOMContentLoaded", () => {
     sincronizarCatalogo();
 });
 
-/* ============================================================
+/*
    API GLOBAL OPCIONAL
-   ============================================================ */
+*/
 
 window.BibliotecaLivros = {
     aplicarFiltros,

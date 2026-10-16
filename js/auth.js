@@ -1,26 +1,24 @@
 "use strict";
 
-/* ============================================================
-   BIBLIOTECA DIGITAL — AUTH.JS
+/* 
    Login, cadastro, recuperação de senha e login com Google.
 
    Este arquivo também define getToken()/getUsuario()/logout(),
    que os módulos admin-livros.js, admin-usuarios.js e
    admin-emprestimos.js já esperam encontrar como funções globais.
-   ============================================================ */
+   */
 
 const API_BASE_URL = window.API_BASE_URL || "http://127.0.0.1:5000";
 window.API_BASE_URL = API_BASE_URL;
 
-/* ============================================================
-   SESSÃO (localStorage)
+/*
+  (localStorage)
 
    Guardamos os dados em dois formatos ao mesmo tempo:
-   - "biblioteca_token" / "biblioteca_usuario" (JSON) — formato usado
-     pelos módulos novos (livros.js, admin-*.js).
+   - "biblioteca_token" / "biblioteca_usuario" (JSON)
    - "token" / "tipo" / "nome" / "usuarioId" — formato usado por
      telas mais antigas, mantido por compatibilidade.
-   ============================================================ */
+   */
 
 function salvarSessao(dados) {
   const usuario = dados.usuario || {};
@@ -80,9 +78,7 @@ function exigirAcessoAdmin() {
 // - CLIENTE logado: mesmo menu, mas "Entrar" vira "Sair"
 // - ADM/ATENDENTE logado: menu vira Livros/Usuários/Empréstimos
 //   (apontando para os painéis administrativos) + "Sair"
-//
-// Roda sozinho em qualquer página que carregue este arquivo (ver
-// DOMContentLoaded no fim do arquivo) — não precisa ser chamada à mão.
+
 function configurarNavegacao() {
   const usuario = getUsuario();
   const token = getToken();
@@ -110,7 +106,6 @@ function configurarNavegacao() {
         );
       });
     } else {
-      // Corrige um link antigo que ficou sem o ".html" no final.
       linksMenu.forEach((link) => {
         if ((link.getAttribute("href") || "").endsWith("meus-emprestimos")) {
           link.setAttribute("href", "meus-emprestimos.html");
@@ -137,14 +132,14 @@ function configurarNavegacao() {
 
 document.addEventListener("DOMContentLoaded", configurarNavegacao);
 
-/* ============================================================
+/*
    MENSAGENS DE FORMULÁRIO
 
    Funciona para os três padrões usados nas telas do projeto:
    - <p id="mensagem">                (sem estado "hidden")
    - <div class="form-message">       (precisa da classe "show")
    - <div class="auth-message" hidden> (precisa remover o atributo "hidden")
-   ============================================================ */
+   */
 function exibirMensagem(elemento, texto, tipo = "error") {
   if (!elemento) return;
   elemento.hidden = false;
@@ -156,9 +151,9 @@ function exibirMensagem(elemento, texto, tipo = "error") {
   elemento.classList.add(tipo === "error" ? "erro" : "sucesso");
 }
 
-/* ============================================================
+/* 
    BOTÕES DE "MOSTRAR SENHA"
-   ============================================================ */
+ */
 document.getElementById("togglePassword")?.addEventListener("click", () => {
   const campo = document.getElementById("senha");
   if (!campo) return;
@@ -173,17 +168,17 @@ document.querySelectorAll(".password-toggle").forEach((botao) => {
   });
 });
 
-/* ============================================================
+/*
    LINK "ESQUECI MINHA SENHA" (login.html)
-   ============================================================ */
+ */
 document.getElementById("forgotPassword")?.addEventListener("click", (e) => {
   e.preventDefault();
   window.location.href = "esqueci-senha.html";
 });
 
-/* ============================================================
+/*
    LOGIN  (login.html — #loginForm)
-   ============================================================ */
+ */
 document.getElementById("loginForm")?.addEventListener("submit", async (e) => {
   e.preventDefault();
   const mensagem = document.getElementById("loginMessage");
@@ -220,10 +215,10 @@ document.getElementById("loginForm")?.addEventListener("submit", async (e) => {
   }
 });
 
-/* ============================================================
+/*
    CADASTRO  (cadastro.html — #cadastroForm)
    Cria sempre uma conta do tipo CLIENTE.
-   ============================================================ */
+ */
 document.getElementById("cadastroForm")?.addEventListener("submit", async (e) => {
   e.preventDefault();
   const mensagem = document.getElementById("cadastroMessage");
@@ -284,9 +279,9 @@ document.getElementById("cadastroForm")?.addEventListener("submit", async (e) =>
   }
 });
 
-/* ============================================================
+/*
    RECUPERAÇÃO DE SENHA — passo 1  (esqueci-senha.html — #recuperacaoForm)
-   ============================================================ */
+ */
 document.getElementById("recuperacaoForm")?.addEventListener("submit", async (e) => {
   e.preventDefault();
   const mensagem = document.getElementById("recuperacaoMessage");
@@ -315,9 +310,9 @@ document.getElementById("recuperacaoForm")?.addEventListener("submit", async (e)
   }
 });
 
-/* ============================================================
+/*
    RECUPERAÇÃO DE SENHA — passo 2  (redefinir-senha.html — #redefinirSenhaForm)
-   ============================================================ */
+ */
 (() => {
   const campoToken = document.getElementById("token");
   if (!campoToken) return;
@@ -375,13 +370,15 @@ document.getElementById("redefinirSenhaForm")?.addEventListener("submit", async 
   }
 });
 
-/* ============================================================
+/*
    LOGIN COM GOOGLE  (login.html — #googleLoginButton)
 
    Requer js/firebase-config.js carregado ANTES deste arquivo,
    e o provedor "Google" ativado no Firebase Console
    (Authentication > Sign-in method).
-   ============================================================ */
+
+   Status: OK.
+ */
 document.getElementById("googleLoginButton")?.addEventListener("click", async () => {
   const mensagem = document.getElementById("loginMessage");
   const botao = document.getElementById("googleLoginButton");
@@ -414,7 +411,7 @@ document.getElementById("googleLoginButton")?.addEventListener("click", async ()
     window.location.href = "livros.html";
   } catch (erro) {
     if (erro?.code === "auth/popup-closed-by-user") {
-      // Usuário fechou o popup — não é um erro real, não exibe mensagem.
+      // Usuário fechou o popup, não é um erro real, não exibe mensagem.
       return;
     }
     console.error(erro);

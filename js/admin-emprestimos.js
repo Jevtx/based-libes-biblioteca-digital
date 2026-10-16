@@ -1,8 +1,8 @@
 "use strict";
 
-/* ============================================================
+/*
    ADMINISTRAÇÃO — EMPRÉSTIMOS
-   ============================================================ */
+*/
 
 const AdminEmprestimosPage = {
 
@@ -17,9 +17,9 @@ const AdminEmprestimosPage = {
 };
 
 
-/* ============================================================
+/*
    ELEMENTOS
-   ============================================================ */
+*/
 
 const elementosEmprestimosAdmin = {
 
@@ -100,15 +100,12 @@ const elementosEmprestimosAdmin = {
 };
 
 
-/* ============================================================
+/* 
    CHAMADAS AUTENTICADAS À API
 
    Essa função é usada por toda a página (listar empréstimos, devolver
-   um empréstimo), mas nunca tinha sido escrita — o arquivo já contava
-   com ela, chamando `apiAuthenticatedRequest(...)`, só faltava esta
-   definição. Sem ela, todo carregamento de empréstimos falhava
-   silenciosamente com "apiAuthenticatedRequest is not defined".
-   ============================================================ */
+   um empréstimo)
+*/
 
 async function apiAuthenticatedRequest(endpoint, opcoes = {}) {
     const base = window.API_BASE_URL || "http://127.0.0.1:5000";
@@ -163,9 +160,9 @@ async function apiAuthenticatedRequest(endpoint, opcoes = {}) {
 }
 
 
-/* ============================================================
+/*
    INICIALIZAÇÃO
-   ============================================================ */
+*/
 
 document.addEventListener(
     "DOMContentLoaded",
@@ -227,9 +224,9 @@ async function iniciarAdminEmprestimos() {
 }
 
 
-/* ============================================================
+/*
    USUÁRIO ATUAL
-   ============================================================ */
+*/
 
 function obterUsuarioAtual() {
 
@@ -269,9 +266,9 @@ function obterUsuarioAtual() {
 }
 
 
-/* ============================================================
+/*
    PREENCHER USUÁRIO
-   ============================================================ */
+*/
 
 function preencherUsuario(usuario) {
 
@@ -322,9 +319,9 @@ function preencherUsuario(usuario) {
 }
 
 
-/* ============================================================
+/*
    EVENTOS
-   ============================================================ */
+*/
 
 function configurarEventos() {
 
@@ -368,9 +365,9 @@ function configurarEventos() {
 }
 
 
-/* ============================================================
+/*
    LOGOUT
-   ============================================================ */
+*/
 
 function executarLogout() {
 
@@ -397,9 +394,9 @@ function executarLogout() {
 }
 
 
-/* ============================================================
+/*
    CARREGAR EMPRÉSTIMOS
-   ============================================================ */
+*/
 
 async function carregarEmprestimos() {
 
@@ -497,9 +494,9 @@ async function carregarEmprestimos() {
 }
 
 
-/* ============================================================
+/*
    NORMALIZAR EMPRÉSTIMO
-   ============================================================ */
+ */
 
 function normalizarEmprestimo(
     emprestimo
@@ -591,9 +588,9 @@ function normalizarEmprestimo(
 }
 
 
-/* ============================================================
+/* 
    NORMALIZAR SITUAÇÃO
-   ============================================================ */
+ */
 
 function normalizarSituacao(
     situacao
@@ -619,9 +616,9 @@ function normalizarSituacao(
 }
 
 
-/* ============================================================
+/*
    FILTROS
-   ============================================================ */
+ */
 
 function aplicarFiltrosEmprestimos() {
 
@@ -699,9 +696,9 @@ function aplicarFiltrosEmprestimos() {
 }
 
 
-/* ============================================================
+/* 
    NORMALIZAR TEXTO
-   ============================================================ */
+ */
 
 function normalizarTexto(
     texto
@@ -718,9 +715,9 @@ function normalizarTexto(
 }
 
 
-/* ============================================================
+/*
    ESTATÍSTICAS
-   ============================================================ */
+ */
 
 function atualizarEstatisticas() {
 
@@ -765,9 +762,9 @@ function atualizarEstatisticas() {
 }
 
 
-/* ============================================================
+/*
    RENDERIZAR TABELA
-   ============================================================ */
+ */
 
 function renderizarTabela() {
 
@@ -830,9 +827,9 @@ function renderizarTabela() {
 }
 
 
-/* ============================================================
+/*
    CRIAR LINHA
-   ============================================================ */
+ */
 
 function criarLinhaEmprestimo(
     emprestimo
@@ -999,9 +996,9 @@ function criarLinhaEmprestimo(
 }
 
 
-/* ============================================================
+/*
    EVENTO DE DEVOLUÇÃO
-   ============================================================ */
+ */
 
 document.addEventListener(
     "click",
@@ -1035,9 +1032,9 @@ document.addEventListener(
 );
 
 
-/* ============================================================
+/*
    DEVOLVER LIVRO
-   ============================================================ */
+ */
 
 async function devolverEmprestimo(
     emprestimoId,
@@ -1242,9 +1239,9 @@ async function devolverEmprestimo(
 }
 
 
-/* ============================================================
+/*
    FORMATAÇÃO DE DATA
-   ============================================================ */
+ */
 
 function formatarData(
     valor
@@ -1312,9 +1309,9 @@ function formatarData(
 }
 
 
-/* ============================================================
+/*
    ESCAPE HTML
-   ============================================================ */
+ */
 
 function escapeHtml(
     valor
@@ -1346,9 +1343,9 @@ function escapeHtml(
 }
 
 
-/* ============================================================
+/*
    ESTADOS VISUAIS
-   ============================================================ */
+ */
 
 function mostrarCarregando(
     mostrar
@@ -1476,9 +1473,9 @@ function mostrarMensagem(
 }
 
 
-/* ============================================================
+/*
    EXPOSIÇÃO GLOBAL
-   ============================================================ */
+ */
 
 window.BibliotecaAdminEmprestimos = {
 
