@@ -1,59 +1,76 @@
-# Sistema de Biblioteca — pronto para publicação
+# Based Libes — Biblioteca Digital
 
-Este pacote já está revisado, testado e configurado para ir ao ar. Login com Google, cadastro,
-CRUD de livros/usuários e empréstimos foram testados localmente com sucesso.
+Aplicação web de gestão de biblioteca: catálogo, empréstimos e painel administrativo,
+com três perfis de acesso e login com Google.
 
-## O que foi revisado e testado nesta rodada
+Desenvolvida na disciplina *Engenharia de Software e Projeto Interdisciplinar II*
+(Grau Técnico). [A CONFIRMAR: individual ou em grupo? Se grupo: "Em grupo de N pessoas.
+Minha parte: ..."]
 
-- Backend recompilado e testado com um cliente de teste do Flask: todas as rotas (`/`, `/login`,
-  `/cadastro`, `/login/google`, `/livros`, `/usuarios`, `/emprestimos` e as de recuperação de
-  senha) respondem corretamente, inclusive nos casos de erro (token ausente, token inválido,
-  corpo de requisição vazio).
-- Confirmado que `JWT_SECRET_KEY` no `.env` foi gerada corretamente (64 caracteres, formato
-  esperado).
-- Confirmado que `CORS_ORIGINS` já estava restrito a `localhost:5500`/`127.0.0.1:5500` (passo 4
-  da lista de segurança).
-- Confirmado que `firebase-config.js` está com valores reais (`apiKey`, `messagingSenderId`,
-  `appId`) do projeto `biblioteca-14ecc`.
-- **Adicionado `js/config.js`**: define automaticamente a URL da API certa
-  (desenvolvimento local vs. produção), incluído como o primeiro `<script>` em todas as
-  páginas. Veja `Publicar_no_Netlify.md` para o que precisa ser editado nele.
-- **Adicionado suporte a `FIREBASE_CREDENTIALS_JSON`** em `firebase_config.py`: em produção, em
-  vez de subir o `serviceAccountKey.json`, você cola o conteúdo dele numa variável de ambiente.
-  Testado e funcionando.
-- **Adicionado `gunicorn`** ao `requirements.txt` (servidor de produção; o `python app.py` local
-  continua funcionando igual, sem mudança no seu fluxo do dia a dia).
-- **Adicionado `netlify.toml`** na raiz — o projeto foi reorganizado com `index.html` e tudo do frontend direto na raiz (sem a subpasta `frontend/`), o que simplifica a configuração no Netlify. A pasta `backend/` continua separada, e o `netlify.toml` já bloqueia o acesso público a ela.
-- `CORS_ORIGINS` no `app.py` agora também lê uma variável de ambiente (além dos endereços locais
-  fixos), para você liberar a URL do Netlify sem precisar editar código.
+**Demo:** https://basedlibes.netlify.app
+> O backend está em plano gratuito e a primeira requisição pode levar cerca de 1 minuto.
+> Entrar com Google cria uma conta de Cliente automaticamente.
 
-## Próximo passo
+## Telas
 
-Siga o **`Publicar_no_Netlify.md`** — é o passo a passo completo (backend no Render + frontend
-no Netlify + ajustes finais de CORS e Firebase). O **`Proximos_Passos_e_Seguranca.md`** continua
-valendo como checklist de segurança geral.
+![Login](docs/img/login.png)
+![Catálogo](docs/img/catalogo.png)
+![Meus empréstimos](docs/img/meus-emprestimos.png)
+![Gestão de livros](docs/img/admin-livros.png)
+![Gestão de usuários](docs/img/admin-usuarios.png)
+![Controle de empréstimos](docs/img/admin-emprestimos.png)
+
+## Funcionalidades por perfil
+
+| Ação | Cliente | Atendente | Admin |
+|---|:-:|:-:|:-:|
+| Consultar catálogo e pegar livro emprestado | ✔ | ✔ | ✔ |
+| Devolver o próprio empréstimo | ✔ | ✔ | ✔ |
+| Ver histórico pessoal | ✔ | ✔ | ✔ |
+| Cadastrar, editar e excluir livros | | ✔ | ✔ |
+| Ver todos os empréstimos e registrar devolução | | ✔ | ✔ |
+| Cadastrar Clientes e Atendentes | | ✔ | ✔ |
+| Excluir usuários | | [A CONFIRMAR após decidir a regra] | ✔ |
+| Cadastrar e excluir Admin | | | ✔ |
+
+Quem se cadastra ou entra com Google recebe sempre o perfil Cliente.
+
+## Tecnologias
+
+- **Backend:** Python, Flask, Flask-JWT-Extended, Firebase Admin SDK
+- **Banco e autenticação:** Cloud Firestore, Firebase Authentication (login com Google)
+- **Frontend:** HTML, CSS e JavaScript
+- **Hospedagem:** Netlify (frontend) e Render (API)
+
+## Segurança implementada
+
+- Senhas armazenadas com hash (Werkzeug), nunca em texto puro
+- Autenticação com JWT e permissões por perfil verificadas no backend
+- Empréstimo e devolução em transações do Firestore (evita empréstimo duplicado)
+- Recuperação de senha com token de uso único, validade de 30 minutos e guardado como hash
+- CORS restrito às origens autorizadas
+- Credenciais em variáveis de ambiente, fora do repositório
 
 ## Como rodar localmente
+
+Requisitos: Python 3.10+ e um projeto Firebase com Firestore e conta de serviço.
 
 ```bash
 cd backend
 python -m venv venv
-# Windows: venv\Scripts\activate | Linux/Mac: source venv/bin/activate
+source venv/Scripts/activate      # Windows (Git Bash); Linux/Mac: source venv/bin/activate
 pip install -r requirements.txt
+cp .env.example .env              # preencha JWT_SECRET_KEY
+# coloque serviceAccountKey.json em backend/ (ou defina FIREBASE_CREDENTIALS_JSON)
+python seed_admin.py              # cria o primeiro admin (só na primeira vez)
+python app.py                     # API em http://127.0.0.1:5000
 ```
 
-Copie `.env.example` para `.env` e preencha `JWT_SECRET_KEY` (vocês já fizeram isso corretamente).
+Em outro terminal, na raiz do projeto: `python -m http.server 5500` e abra `http://127.0.0.1:5500`.
 
-```bash
-python seed_admin.py   # só na primeira vez
-python app.py           # sobe a API em http://localhost:5000
-```
+## Próximos passos
 
-Sirva a pasta raiz do projeto com o Live Server do VS Code (porta 5500) ou `python -m http.server 5500` a partir dela — o `index.html` já está na raiz.
-
-## Atenção: `serviceAccountKey.json` e `.env`
-
-Os dois são credenciais reais e **não podem** ir para um repositório público, print de tela ou
-mensagem de grupo. Ambos já estão listados no `backend/.gitignore`. Para publicar em produção
-sem subir esses arquivos, veja a seção sobre `FIREBASE_CREDENTIALS_JSON` no
-`Publicar_no_Netlify.md`.
+- Testes automatizados das rotas principais (login, permissões, empréstimo duplicado)
+- Limite de tentativas de login
+- Paginação e menos consultas repetidas na listagem de empréstimos
+- Impedir exclusão de usuário com empréstimo ativo
