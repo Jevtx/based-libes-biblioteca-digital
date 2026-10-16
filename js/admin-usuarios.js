@@ -775,13 +775,13 @@ function renderizarUsuarios() {
                 document.createElement("tr");
 
 
+            const tipoSolicitante =
+                AdminUsuariosPage.tipoUsuarioAtual;
             const podeExcluir =
-                usuario.id !==
-                usuarioLogadoId &&
+                usuario.id !== usuarioLogadoId &&
                 (
-                    usuario.tipo !== "ADM" ||
-                    AdminUsuariosPage
-                        .tipoUsuarioAtual === "ADM"
+                    tipoSolicitante === "ADM" ||
+                    usuario.tipo === "CLIENTE"
                 );
 
 
@@ -803,17 +803,15 @@ function renderizarUsuarios() {
 
             } else {
 
-                let motivo =
-                    "Protegido";
+                                let motivo = "Protegido";
 
-
-                if (
-                    usuario.id ===
-                    usuarioLogadoId
+                if (usuario.id === usuarioLogadoId) {
+                    motivo = "Seu usuário";
+                } else if (
+                    usuario.tipo !== "CLIENTE" &&
+                    tipoSolicitante !== "ADM"
                 ) {
-
-                    motivo =
-                        "Seu usuário";
+                    motivo = "Somente ADM";
                 }
 
 
@@ -1414,16 +1412,13 @@ async function excluirUsuario(id) {
     }
 
 
-    if (
-        usuario.tipo === "ADM" &&
-        AdminUsuariosPage
-            .tipoUsuarioAtual !== "ADM"
+        if (
+        AdminUsuariosPage.tipoUsuarioAtual === "ATENDENTE" &&
+        usuario.tipo !== "CLIENTE"
     ) {
-
         mostrarErroUsuarios(
-            "ATENDENTE não pode excluir usuário ADM."
+            "ATENDENTE só pode excluir usuários do tipo CLIENTE."
         );
-
         return;
     }
 

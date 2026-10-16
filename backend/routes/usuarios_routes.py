@@ -106,10 +106,10 @@ def excluir_usuario(usuario_id):
     tipo_solicitante = get_jwt().get("tipo")
     solicitante_id = str(get_jwt().get("sub"))
 
-    # Somente ADM pode excluir ADM.
-    if alvo.get("tipo") == "ADM" and tipo_solicitante != "ADM":
+    # ATENDENTE só pode excluir CLIENTE. ADM pode excluir qualquer perfil.
+    if tipo_solicitante == "ATENDENTE" and alvo.get("tipo") != "CLIENTE":
         return erro(
-            "ATENDENTE não pode excluir usuário ADM.",
+            "ATENDENTE só pode excluir usuários do tipo CLIENTE.",
             403,
         )
 
