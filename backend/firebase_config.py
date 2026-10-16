@@ -8,10 +8,7 @@ BASE_DIR = os.path.dirname(os.path.abspath(__file__))
 SERVICE_ACCOUNT_PATH = os.path.join(BASE_DIR, "serviceAccountKey.json")
 
 if not firebase_admin._apps:
-    # Em produção (Render, Railway, etc.) é mais seguro colar o conteúdo
-    # inteiro do serviceAccountKey.json em uma variável de ambiente do
-    # que subir o arquivo para o repositório Git. Se essa variável
-    # existir, ela tem prioridade sobre o arquivo local.
+    
     credenciais_env = os.getenv("FIREBASE_CREDENTIALS_JSON")
 
     if credenciais_env:

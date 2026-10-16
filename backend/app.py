@@ -6,7 +6,7 @@ from flask_cors import CORS
 from flask_jwt_extended import JWTManager
 from werkzeug.exceptions import HTTPException
 
-# Carrega o arquivo .env (se existir) para variáveis como
+# Carrega o arquivo .env para variáveis como
 # JWT_SECRET_KEY e as configurações de SMTP da recuperação de senha.
 load_dotenv()
 
@@ -26,10 +26,7 @@ if not secret:
 app.config["JWT_SECRET_KEY"] = secret
 
 # Origens autorizadas a chamar a API. Em desenvolvimento, o Live Server
-# do VS Code roda em localhost:5500. Em produção, adicione a URL do seu
-# site no Netlify na variável de ambiente CORS_ORIGINS (separadas por
-# vírgula), por exemplo:
-#   CORS_ORIGINS=https://seu-site.netlify.app
+# do VS Code roda em localhost:5500. 
 origens_extra = os.getenv("CORS_ORIGINS", "")
 origens = ["http://localhost:5500", "http://127.0.0.1:5500"]
 origens += [origem.strip() for origem in origens_extra.split(",") if origem.strip()]
@@ -47,15 +44,11 @@ app.register_blueprint(emprestimos_bp)
 
 
 # Garante que qualquer erro inesperado do servidor (uma exceção que
-# ninguém previu) sempre volte como JSON, com o campo "erro" que o
-# frontend já sabe ler — em vez da página HTML padrão do Flask, que
-# fazia o frontend mostrar uma mensagem genérica sem pista nenhuma do
-# que realmente aconteceu.
+# ninguém previu) sempre volte como JSON.
 @app.errorhandler(Exception)
 def tratar_erro_inesperado(erro):
     if isinstance(erro, HTTPException):
-        # Erros "normais" do próprio Flask (404 rota inexistente, 405
-        # método errado, etc.) — mantém o status original, só troca o
+        # Erros "normais" do próprio Flask — mantém o status original, só troca o
         # corpo pra JSON.
         return {"erro": erro.description}, erro.code
 
