@@ -1,9 +1,10 @@
+import json
+import urllib.error
+import urllib.request
 import hashlib
 import os
 import secrets
-import smtplib
 from datetime import datetime, timedelta, timezone
-from email.message import EmailMessage
 
 from flask import Blueprint, jsonify, request
 from firebase_admin import auth as firebase_auth
@@ -17,7 +18,7 @@ auth_bp = Blueprint("auth", __name__)
 # Tempo de validade do link de recuperação.
 RESET_TOKEN_MINUTES = 30
 
-# Resposta genérica para não revelar se um email está cadastrado.
+# Resposta para não revelar se um email está cadastrado.
 RESET_GENERIC_MESSAGE = (
     "Se o email estiver cadastrado, você receberá "
     "as instruções para redefinir a senha."
@@ -33,58 +34,56 @@ def _hash_token(token):
 
 
 def _enviar_email_recuperacao(email, nome, token):
-    """
-    Envia o link de recuperação usando SMTP.
-    Configure as variáveis SMTP no ambiente antes de usar em produção.
-    """
-    smtp_host = os.getenv("SMTP_HOST")
-    smtp_port = int(os.getenv("SMTP_PORT", "587"))
-    smtp_user = os.getenv("SMTP_USER")
-    smtp_password = os.getenv("SMTP_PASSWORD")
-    smtp_from = os.getenv("SMTP_FROM", smtp_user or "")
+    """Envia o link de recuperação pela API HTTPS da Brevo (porta 443)."""
+    api_key = os.getenv("BREVO_API_KEY")
+    remetente = os.getenv("EMAIL_FROM")
     frontend_url = os.getenv(
         "FRONTEND_URL",
         "http://localhost:5500"
     ).rstrip("/")
 
-    if not all([smtp_host, smtp_user, smtp_password, smtp_from]):
+    if not api_key or not remetente:
         raise RuntimeError(
-            "SMTP não configurado. Defina SMTP_HOST, SMTP_USER, "
-            "SMTP_PASSWORD e SMTP_FROM."
+            "E-mail não configurado. Defina BREVO_API_KEY e EMAIL_FROM."
         )
 
-    link = (
-        f"{frontend_url}/redefinir-senha.html"
-        f"?token={token}"
+    link = f"{frontend_url}/redefinir-senha.html?token={token}"
+
+    texto = (
+        f"Olá, {nome}!\n\n"
+        "Recebemos uma solicitação para redefinir a senha da sua conta "
+        "no Sistema de Biblioteca.\n\n"
+        f"Use o link abaixo para criar uma nova senha:\n\n{link}\n\n"
+        f"Este link é válido por {RESET_TOKEN_MINUTES} minutos e pode ser "
+        "usado uma única vez.\n\n"
+        "Se você não solicitou a recuperação, ignore este email.\n\n"
+        "Atenciosamente,\nSistema de Biblioteca\n"
     )
 
-    mensagem = EmailMessage()
-    mensagem["Subject"] = "Recuperação de senha - Biblioteca"
-    mensagem["From"] = smtp_from
-    mensagem["To"] = email
+    corpo = json.dumps({
+        "sender": {"name": "Based Libes", "email": remetente},
+        "to": [{"email": email, "name": nome}],
+        "subject": "Recuperação de senha - Biblioteca",
+        "textContent": texto,
+    }).encode("utf-8")
 
-    mensagem.set_content(
-        f"""Olá, {nome}!
-
-Recebemos uma solicitação para redefinir a senha da sua conta no Sistema de Biblioteca.
-
-Use o link abaixo para criar uma nova senha:
-
-{link}
-
-Este link é válido por {RESET_TOKEN_MINUTES} minutos e pode ser usado uma única vez.
-
-Se você não solicitou a recuperação, ignore este email.
-
-Atenciosamente,
-Sistema de Biblioteca
-"""
+    requisicao = urllib.request.Request(
+        "https://api.brevo.com/v3/smtp/email",
+        data=corpo,
+        headers={
+            "api-key": api_key,
+            "content-type": "application/json",
+            "accept": "application/json",
+        },
+        method="POST",
     )
 
-    with smtplib.SMTP(smtp_host, smtp_port, timeout=20) as smtp:
-        smtp.starttls()
-        smtp.login(smtp_user, smtp_password)
-        smtp.send_message(mensagem)
+    try:
+        with urllib.request.urlopen(requisicao, timeout=20) as resposta:
+            resposta.read()
+    except urllib.error.HTTPError as exc:
+        detalhe = exc.read().decode("utf-8", "ignore")
+        raise RuntimeError(f"Brevo respondeu {exc.code}: {detalhe}") from exc
 
 
 @auth_bp.post("/login")
@@ -257,8 +256,6 @@ def solicitar_recuperacao():
     """
     Solicita recuperação por email.
 
-    Importante:
-    - A resposta é sempre genérica para evitar enumeração de contas.
     - O token bruto só vai para o email.
     - No Firestore fica somente o hash do token.
     """
