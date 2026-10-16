@@ -4,12 +4,20 @@ Aplicação web de gestão de biblioteca: catálogo, empréstimos e painel admin
 com três perfis de acesso e login com Google.
 
 Desenvolvida na disciplina *Engenharia de Software e Projeto Interdisciplinar II*
-(Grau Técnico). [A CONFIRMAR: individual ou em grupo? Se grupo: "Em grupo de N pessoas.
-Minha parte: ..."]
+(Grau Técnico). Desenvolvido com apoio de ferramentas de IA (Claude) no backend e no frontend.
+
 
 **Demo:** https://basedlibes.netlify.app
 > O backend está em plano gratuito e a primeira requisição pode levar cerca de 1 minuto.
 > Entrar com Google cria uma conta de Cliente automaticamente.
+
+## Equipe
+
+| Integrante | Contribuição |
+|---|---|
+| Guilherme Willian | Modelagem das coleções, esqueleto do backend, configuração do Firebase/Firestore, integração frontend–API, correção de bugs de backend, publicação (Netlify e Render), manutenção do repositório |
+| Gabriel Ferreira | API: autenticação JWT e permissões, login e cadastro, CRUD de livros e usuários, rotas de empréstimo e devolução |
+| Lucas Rodrigues | Frontend: telas de login e cadastro, gestão de livros e usuários, “Meus empréstimos” e controle geral |
 
 ## Telas
 
@@ -30,7 +38,7 @@ Minha parte: ..."]
 | Cadastrar, editar e excluir livros | | ✔ | ✔ |
 | Ver todos os empréstimos e registrar devolução | | ✔ | ✔ |
 | Cadastrar Clientes e Atendentes | | ✔ | ✔ |
-| Excluir usuários | | [A CONFIRMAR após decidir a regra] | ✔ |
+| Excluir usuários | | | ✔ |
 | Cadastrar e excluir Admin | | | ✔ |
 
 Quem se cadastra ou entra com Google recebe sempre o perfil Cliente.
