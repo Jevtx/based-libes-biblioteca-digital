@@ -41,7 +41,7 @@
        Painel administrativo
       </div>
 </div>
-<span aria-live="polite" class="admin-profile-badge" id="adminLoansProfileBadge">
+<span hidden aria-live="polite" class="admin-profile-badge" id="adminLoansProfileBadge">
 </span>
 <button class="logout" id="adminLoansLogout" type="button">
       Sair
@@ -134,23 +134,14 @@
 <div class="table-wrap" id="adminLoansTableWrapper">
 <table class="table">
 <thead>
-<tr>
-<th>
-         Livro
-        </th>
-<th>
-         Leitor
-        </th>
-<th>
-         Empréstimo
-        </th>
-<th>
-         Situação
-        </th>
-<th>
-         Ações
-        </th>
-</tr>
+  <tr>
+    <th>Livro</th>
+    <th>Leitor</th>
+    <th>Empréstimo</th>
+    <th>Devolução</th>
+    <th>Situação</th>
+    <th>Ações</th>
+  </tr>
 </thead>
 <tbody id="adminLoansTableBody">
 </tbody>
