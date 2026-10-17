@@ -6,8 +6,8 @@ from flask_cors import CORS
 from flask_jwt_extended import JWTManager
 from werkzeug.exceptions import HTTPException
 
-# Carrega o arquivo .env para variáveis como
-# JWT_SECRET_KEY e as configurações de SMTP da recuperação de senha.
+# Carrega o arquivo .env para variáveis como JWT_SECRET_KEY, CORS_ORIGINS
+# e as configurações de e-mail (BREVO_API_KEY e EMAIL_FROM).
 load_dotenv()
 
 import firebase_config
@@ -25,8 +25,9 @@ if not secret:
     raise RuntimeError("Defina JWT_SECRET_KEY no ambiente ou no .env.")
 app.config["JWT_SECRET_KEY"] = secret
 
-# Origens autorizadas a chamar a API. Em desenvolvimento, o Live Server
-# do VS Code roda em localhost:5500. 
+# Origens autorizadas a chamar a API. O Live Server do VS Code (localhost:5500)
+# já vem liberado; em produção, defina CORS_ORIGINS com a URL do site,
+# separadas por vírgula.
 origens_extra = os.getenv("CORS_ORIGINS", "")
 origens = ["http://localhost:5500", "http://127.0.0.1:5500"]
 origens += [origem.strip() for origem in origens_extra.split(",") if origem.strip()]

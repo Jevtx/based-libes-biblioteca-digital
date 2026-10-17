@@ -89,6 +89,7 @@ Variáveis principais (`backend/.env.example` tem a lista completa):
 | `FIREBASE_CREDENTIALS_JSON` | Conteúdo da chave de serviço (ou use o arquivo `backend/serviceAccountKey.json`, que está no `.gitignore`) |
 | `FRONTEND_URL` | Endereço do site, usado no link do e-mail de recuperação |
 | `BREVO_API_KEY` e `EMAIL_FROM` | Envio do e-mail de recuperação. Sem elas o sistema funciona, mas esse e-mail não é enviado. |
+| `CORS_ORIGINS` | Endereços do site autorizados a chamar a API, separados por vírgula. Em produção, a URL do Netlify. O localhost:5500 já vem liberado. |
 
 Para o site, na raiz do projeto, rode `python -m http.server 5500` e abra `http://127.0.0.1:5500`. A URL da API fica em `js/config.js`.
 
